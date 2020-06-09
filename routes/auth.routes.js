@@ -3,7 +3,7 @@ const passport = require('passport');
 
 
 router.get('/login', (req, res) => {
-    res.json({message: 'These routes are working.'});
+    res.send('<h1>Log in via <a href="/auth/google">Google</a></h1>');
 })
 
 router.get('/google', passport.authenticate('google',
@@ -18,7 +18,8 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    res.json({message: 'These routes are working.'});
+    req.logout();
+    res.redirect('/auth/login')
 })
 
 
