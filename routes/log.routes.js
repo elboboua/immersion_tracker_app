@@ -4,7 +4,7 @@ const knex = require('../config/KnexConnection');
 // get all logs for a user
 router.get('/getAllLogs', async (req, res) => {
 
-    let result = await knex('log').where({user_id: req.user.id, deleted: false});
+    let result = await knex('log').where({user_id: req.user.id, deleted: false}).orderBy('date', 'desc').orderBy('id', 'desc');
     res.send(result);
 })
 
@@ -34,6 +34,21 @@ router.post('/delete', async (req, res) => {
         status = 404;
     }
     res.sendStatus(status);
+})
+
+router.post('/getLastWeek', async (req, res) => {
+    let result = await knex('log')
+    .select('date')
+    .sum('time as time',)
+    .groupBy('date')
+    .as('time')
+    .where({user_id: req.user.id})
+    .andWhere('date', '<=', req.body.today)
+    .andWhere('date', '>=', req.body.lastWeek)
+    .orderBy('date', 'asc');
+    console.log(result)
+
+    res.send(result);
 })
 
 

@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const hbs = require('express-handlebars');
+const cors = require('cors')
 
 const authRoutes = require('./routes/auth.routes');
 const logRoutes = require('./routes/log.routes');
@@ -25,6 +26,9 @@ app.use(passport.initialize());
 app.use(passport.session())
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors())
+app.use(express.static('public'))
+
 app.set('view engine', 'hbs');
 app.engine('hbs', hbs({
     extname: 'hbs',
@@ -41,6 +45,9 @@ app.get('/createLog', (req, res) => {
 });
 app.get('/getLogs', (req,res) => {
     res.render('getLogs')
+})
+app.get('/analytics', (req, res) => {
+    res.render('analytics')
 })
 
 app.use('/auth', authRoutes);

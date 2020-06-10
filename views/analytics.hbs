@@ -1,0 +1,75 @@
+<canvas id="myChart" width="400" height="400"></canvas>
+<script src="/ChartJS/Chart.js"></script>
+<script>
+
+
+// get the dates for the request
+let today = new Date();
+let lastWeek = new Date();
+lastWeek.setDate(today.getDate() - 7)
+today = today.toJSON().slice(0,10)
+lastWeek = lastWeek.toJSON().slice(0,10)
+
+// request the json
+const getLastWeeksLog = async () => {
+    let lastWeekAndToday = {
+        today: today,
+        lastWeek: lastWeek
+    }
+    lastWeekAndToday = JSON.stringify(lastWeekAndToday);
+
+    let result = await fetch('/log/getLastWeek', {
+        method: 'post',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: lastWeekAndToday
+    })
+    
+    result = await result.json();
+    console.log(result)
+
+    let dateArray = [];
+    let timeArray = []; 
+
+    result.forEach((object) => {
+        dateArray.push(object.date.slice(0,10));
+        timeArray.push(object.time/60)
+    })
+    console.log(dateArray, timeArray)
+
+
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dateArray,
+            datasets: [{
+                label: 'Days',
+                data: timeArray,
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+// organize the data into arrays
+
+
+getLastWeeksLog()
+
+
+
+
+
+
+</script>
