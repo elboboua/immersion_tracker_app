@@ -1,4 +1,5 @@
-<canvas id="myChart" width="400" height="400"></canvas>
+<canvas id="myChart" width="auto" height="auto"></canvas>
+<button style="margin: auto;" id='toggle'>Toggle cumulative and regular</button>
 <script src="/ChartJS/Chart.js"></script>
 <script>
 
@@ -7,8 +8,8 @@
 let today = new Date();
 let lastWeek = new Date();
 lastWeek.setDate(today.getDate() - 7)
-today = today.toJSON().slice(0,10)
-lastWeek = lastWeek.toJSON().slice(0,10)
+today = today.toJSON() + 'T00:00:00.000Z'
+lastWeek = lastWeek.toJSON().slice(0,10) + 'T00:00:00.000Z'
 
 // request the json
 const getLastWeeksLog = async () => {
@@ -27,16 +28,27 @@ const getLastWeeksLog = async () => {
     })
     
     result = await result.json();
-    console.log(result)
 
     let dateArray = [];
     let timeArray = []; 
 
+    // for standard plot
     result.forEach((object) => {
         dateArray.push(object.date.slice(0,10));
-        timeArray.push(object.time/60)
+        timeArray.push(object.time)
     })
-    console.log(dateArray, timeArray)
+
+    let cumulativeTimeArray = [];
+    // for cumulative plot
+    for (let i = 0; i < result.length; i++) {
+        if (i > 0) {
+            let sum = cumulativeTimeArray[i-1]+result[i].time/60;
+           cumulativeTimeArray.push(sum) 
+        } else {
+            cumulativeTimeArray.push(result[i].time/60) 
+        }   
+    }
+    console.log(cumulativeTimeArray)
 
 
     let ctx = document.getElementById('myChart').getContext('2d');
@@ -46,7 +58,7 @@ const getLastWeeksLog = async () => {
             labels: dateArray,
             datasets: [{
                 label: 'Days',
-                data: timeArray,
+                data: cumulativeTimeArray,
                 borderWidth: 3
             }]
         },
@@ -66,6 +78,12 @@ const getLastWeeksLog = async () => {
 
 
 getLastWeeksLog()
+
+let cumulative = false;
+let toggle = document.getElementById('toggle');
+toggle.addEventListener('click', () => {
+    
+})
 
 
 
