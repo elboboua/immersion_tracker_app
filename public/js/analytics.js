@@ -93,7 +93,7 @@ const createLanguageGraph = (graphInfo) => {
         data: {
             labels: dates,
             datasets: [{
-                label: 'Hours per Day',
+                label: 'Hours per Day'ç,
                 data: individualTimes,
                 backgroundColor: '#443266',
                 borderWidth: 1,
