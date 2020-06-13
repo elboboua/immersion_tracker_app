@@ -21,8 +21,8 @@ router.post('/create', async (req, res) => {
         date: req.body.date
     }
     let result = await knex('log').insert(log);
-    res.send(result[0].id)
-
+    //res.send(result[0].id)
+    res.redirect('/createLog')
 })
 
 router.post('/delete', async (req, res) => {
@@ -38,21 +38,19 @@ router.post('/delete', async (req, res) => {
 
 router.post('/getLastWeek', async (req, res) => {
 
-    console.log(req.body)
     let result = await knex('log')
-    .select(knex.raw('date_format(date, "%Y-%m-%d") as date, sum(time) as time'))
+    .join('language', 'language.id', 'log.language_id')
+    .select(knex.raw('date_format(log.date, "%Y-%m-%d") as date, sum(log.time) as time, language.name as language'))
     .where({user_id: req.user.id})
     .andWhere('date', '<=', req.body.today)
     .andWhere('date', '>=', req.body.lastWeek)
+    .andWhere('deleted', '=', '0')
     .groupBy('date')
-    .orderBy('date', 'asc');
-    console.log(result)
+    .groupBy('language_id')
+    .orderBy('language_id')
+    .orderBy('date', 'asc')
 
-    let result2  = await knex.raw(
-        //`select sum(time), date from log where date between ${req.body.lastWeek} and ${req.body.today} and user_id = ${req.user.id} group by date`
-        "select date, sum(time) from log where date between '2020-06-02' and '2020-06-09' and user_id = 9 group by date"
-        )
-        console.log(result2)
+    console.log(result)
 
     res.send(result);
 })

@@ -1,6 +1,6 @@
 
 <div class="container">
-    <form action="/log/create" method="post">
+    <form id="log-form" action="/log/create" method="post">
         {{!-- // title --}}
         <div class="form-title"><h3>Insert new log</h3></div>
 
@@ -35,11 +35,15 @@
                 <input type="date" class="form-control" name="date" id="date">
             </div>
         </div >
-        <button type="submit" value="submit" class="btn btn-block btn-primary form-group">Submit</button>
+        <button id="submit-button" type="submit" value="submit" class="btn btn-block form-group" style="background-color: #443266; color: white;">Submit</button>
     </form>
 </div>
 
 <script>
+
+
+
+
     let date = document.getElementById('date');
     let myDate = new Date();
     date.value = myDate.toLocaleDateString('en-CA')
