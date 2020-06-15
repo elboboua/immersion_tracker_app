@@ -2,7 +2,6 @@ require('dotenv').config();
 require('./config/passport-setup');
 
 const express = require('express');
-const app = express();
 const passport = require('passport');
 const PORT = process.env.PORT || 3000;
 const cookieSession = require('cookie-session');
@@ -14,8 +13,11 @@ const authRoutes = require('./routes/auth.routes');
 const logRoutes = require('./routes/log.routes');
 const languageRoutes = require('./routes/language.routes');
 const typeRoutes = require('./routes/type.routes');
+const staticRoutes = require('./routes/static.routes')
 
 const {isAuthorized} = require('./middleware/authchecker');
+
+const app = express();
 
 app.use(cookieSession({
     keys: keys.sessionKeys,
@@ -34,22 +36,8 @@ app.engine('hbs', hbs({
     extname: 'hbs',
 }))
 
-app.get('/', (req, res) => {
 
-    res.send('<h1>Hello World!</h1>')
-
-});
-
-app.get('/createLog', (req, res) => {
-    res.render('createLog')
-});
-app.get('/getLogs', (req,res) => {
-    res.render('getLogs')
-})
-app.get('/analytics', (req, res) => {
-    res.render('analytics')
-})
-
+app.use(isAuthorized, staticRoutes);
 app.use('/auth', authRoutes);
 app.use('/log', isAuthorized, logRoutes);
 app.use('/language', isAuthorized, languageRoutes);

@@ -50,8 +50,6 @@ router.post('/getLastWeek', async (req, res) => {
     .orderBy('language_id')
     .orderBy('date', 'asc')
 
-    console.log(result)
-
     res.send(result);
 })
 
@@ -69,8 +67,6 @@ router.post('/getLastMonth', async (req, res) => {
     .orderBy('language_id')
     .orderBy('date', 'asc')
 
-    console.log(result)
-
     res.send(result);
 })
 
@@ -80,17 +76,15 @@ router.post('/getLastYear', async (req, res) => {
     
     let result = await knex('log')
     .join('language', 'language.id', 'log.language_id')
-    .select(knex.raw('month(date) as month, sum(log.time) as time, language.name as language'))
+    .select(knex.raw('month(date) as date, sum(log.time) as time, language.name as language'))
     .where({user_id: req.user.id})
     .andWhere('date', '<=', req.body.today)
-    .andWhere(knex.raw(`year(date) = ${date.getFullYear()}`))
+    .andWhere('date', '>=', req.body.lastYear)
     .andWhere('deleted', '=', '0')
     .groupBy(knex.raw('month(date)'))
     .groupBy('language_id')
     .orderBy('language_id')
-    .orderBy('month', 'asc')
-
-    console.log(result)
+    .orderBy('date', 'asc')
 
     res.send(result);
 })
