@@ -1,9 +1,15 @@
 
 <div class="container text-center">
-    <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 20px">
-        <button type="button" id="week-button" class="btn btn-secondary">Week</button>
-        <button type="button" id="month-button" class="btn btn-secondary">Month</button>
-        <button type="button" id="year-button" class="btn btn-secondary">Year</button>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="week-button" autocomplete="off"> Week
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="month-button" autocomplete="off"> Month
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="year-button" autocomplete="off"> Year
+        </label>
     </div>
 
     <div id="graph-container-week" class="container"></div>
