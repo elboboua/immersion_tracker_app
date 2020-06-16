@@ -1,3 +1,8 @@
+<style>
+
+</style>
+
+
 
 <div class="container">
     <form id="log-form" action="/log/create" method="post">
@@ -13,12 +18,12 @@
         {{!-- // type and language --}}
         <div class="row form-group">
             <div class="col">
-                <label for="language">What language did you do it in?</label>
+                <label for="language">Language:</label>
                 <select class="form-control" name="language_id" id="language">
                 </select>
             </div>
             <div class="col">
-                <label for="type">What type of activity is this?</label>
+                <label for="type">Type of Activity:</label>
                 <select class="form-control" name="type_id" id="type">
                 </select>
             </div>
@@ -44,9 +49,9 @@
 
 
 
-    let date = document.getElementById('date');
+    let dateInput = document.getElementById('dateInput');
     let myDate = new Date();
-    date.value = myDate.toLocaleDateString('en-CA')
+    dateInput.value = myDate.toLocaleDateString('en-CA')
 
     const getLanguages = async () => {
         let languageSelector = document.getElementById('language');

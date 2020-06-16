@@ -22,7 +22,7 @@ router.post('/create', async (req, res) => {
     }
     let result = await knex('log').insert(log);
     //res.send(result[0].id)
-    res.redirect('/createLog')
+    res.redirect('/')
 })
 
 router.post('/delete', async (req, res) => {

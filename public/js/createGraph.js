@@ -1,4 +1,4 @@
-const createLanguageGraph = (graphInfo, id) => {
+const createLanguageGraph = (graphInfo, id, individualTimesString) => {
     
     let graphContainer = document.getElementById(id);
     let { dates, cumulativeTimes, individualTimes, title } = graphInfo;
@@ -11,13 +11,17 @@ const createLanguageGraph = (graphInfo, id) => {
     
     // create a canvas
     let ctx = document.createElement('canvas')
+    ctx.style.height = '300px'
+    ctx.style.minHeight = '200px';
+    ctx.width = 'auto';
+    ctx.height = 'auto'
     ctx.getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: dates,
             datasets: [{
-                label: 'Hours',
+                label: individualTimesString,
                 data: individualTimes,
                 backgroundColor: '#443266',
                 borderWidth: 1,
@@ -27,7 +31,7 @@ const createLanguageGraph = (graphInfo, id) => {
 
             },
             {
-                label: 'Total Cumulative Hours',
+                label: 'Cumulative Hours',
                 data: cumulativeTimes,
                 backgroundColor: 'rgb(141, 72, 159, 0.5)',
                 borderWidth: 1,
@@ -42,6 +46,7 @@ const createLanguageGraph = (graphInfo, id) => {
                 text: title,
                 position: 'top',
                 fontSize: 30,
+                fontColor: '#443266'
             },
             scales: {
                 yAxes: [{
@@ -50,6 +55,8 @@ const createLanguageGraph = (graphInfo, id) => {
                     }
                 }]
             },
+            responsive: true,
+            maintainAspectRatio:false,
         }
     })
 

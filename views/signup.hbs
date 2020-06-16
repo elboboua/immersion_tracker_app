@@ -1,0 +1,87 @@
+{{> navbar-signup}}
+
+<style>
+
+    #welcome {
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 0;
+    }
+
+
+
+    #signup-form {
+        max-width: 300px; 
+        margin: auto; 
+    }
+
+
+    #motivation-message {
+        text-align: center;
+        color: rgb(0, 0, 0, 0.7);
+    }
+
+    #signup-box {
+        background-color: #443266;
+        padding: 20px; 
+        margin-top: 20px;
+    }
+    #signin-text {
+        color: white;
+    }
+
+    #signin-button {
+        margin: auto;
+    }
+
+    @media (max-width:1025px)  { 
+        #example-graph {
+        max-width: 300px; 
+        display: block;
+        width: 75vw;
+        margin: auto;
+        margin-top: 20px;
+        }
+        #signup-form {
+            margin-top: 3vh;
+        }
+    }
+
+    @media (min-width:1025px)  { 
+        #example-graph {
+        max-width: 50vw; 
+        display: inline;
+        float: left;
+        width: 75vw;
+        margin: auto;
+        margin-top: 50px;
+        }
+        #signup-form {
+            display: inline;
+            float: right;
+            margin-top: 15vh;
+            margin-right: 7vw;
+        }
+    }
+</style>
+
+<div id="welcome"><h1>Welcome to Polylogger!</h1></div>
+<div class="container" >
+    <div id=signup-form>
+        <div id='motivation-message'>
+            <h2>Log your language learning and see your progress!</h2>
+            
+        </div>
+        <div class="card text-center" id="signup-box">
+            <div class="card-header">
+            <h4 id='signin-text'>Sign up or Log in:</h4>
+            </div>
+            <a href='/auth/google' id='signin-button' class='btn btn-outline-light'>
+                <img src="https://img.icons8.com/color/50/000000/google-logo.png" class='img' width='30px'/>
+                with Google
+            </a>
+        </div>
+    </div>
+        
+        <img id="example-graph" src="/imgs/graphImage.png"/>
+</div>

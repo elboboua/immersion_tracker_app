@@ -34,11 +34,12 @@ app.use(express.static('public'))
 app.set('view engine', 'hbs');
 app.engine('hbs', hbs({
     extname: 'hbs',
+    partialsDir: __dirname + '/views/partials/'
 }))
 
 
-app.use(isAuthorized, staticRoutes);
 app.use('/auth', authRoutes);
+app.use(isAuthorized, staticRoutes);
 app.use('/log', isAuthorized, logRoutes);
 app.use('/language', isAuthorized, languageRoutes);
 app.use('/type', isAuthorized, typeRoutes);

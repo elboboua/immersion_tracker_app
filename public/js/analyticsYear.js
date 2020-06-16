@@ -72,7 +72,7 @@ const getLastYearsLog = async () => {
         })
         
         
-        createLanguageGraph(graphObj, 'graph-container-year')
+        createLanguageGraph(graphObj, 'graph-container-year', 'Hours per Month')
         
     })
     

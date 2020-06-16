@@ -72,7 +72,7 @@ const getLastWeeksLog = async () => {
         })
         
         
-        createLanguageGraph(graphObj, 'graph-container-week')
+        createLanguageGraph(graphObj, 'graph-container-week', 'Hours per Day')
         
     })
     

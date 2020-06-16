@@ -1,9 +1,8 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
+    res.render('graphs')
 });
-
 router.get('/createLog', (req, res) => {
     res.render('createLog')
 });
@@ -18,9 +17,6 @@ router.get('/analyticsMonth', (req, res) => {
 })
 router.get('/analyticsYear', (req, res) => {
     res.render('analyticsYear')
-})
-router.get('/graphs', (req, res) => {
-    res.render('graphs')
 })
 
 
