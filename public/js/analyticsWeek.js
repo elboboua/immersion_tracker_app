@@ -6,8 +6,8 @@ const getLastWeeksLog = async () => {
     let todayDate = new Date();
     let lastWeekDate = new Date();
     lastWeekDate.setDate(todayDate.getDate() - 7)
-    today = todayDate.toJSON() + 'T00:00:00.000Z'
-    lastWeek = lastWeekDate.toJSON().slice(0,10) + 'T00:00:00.000Z'
+    today = todayDate.toJSON().slice(0,10) + 'T21:00:00.000Z'
+    lastWeek = lastWeekDate.toJSON().slice(0,10) + 'T21:00:00.000Z'
     
     let datesThisWeek = [];
     for (let i = 1; i <= 7; i++) {
@@ -50,7 +50,7 @@ const getLastWeeksLog = async () => {
         result.forEach((object) => {
             if (object.language == language) {
                 
-                graphObj.individualTimes[datesThisWeek.indexOf(object.date)] = Math.round(object.time/60*100)/100;
+                graphObj.individualTimes[datesThisWeek.indexOf(object.date.slice(0,10))] = Math.round(object.time/60*100)/100;
                 
                 graphObj.title = object.language
             }

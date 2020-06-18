@@ -50,7 +50,7 @@ const getLastMonthsLog = async () => {
         result.forEach((object) => {
             if (object.language == language) {
                 
-                graphObj.individualTimes[datesThisMonth.indexOf(object.date)] = Math.round(object.time/60 * 100)/100;
+                graphObj.individualTimes[datesThisMonth.indexOf(object.date.slice(0,10))] = Math.round(object.time/60 * 100)/100;
                 
                 graphObj.title = object.language
             }

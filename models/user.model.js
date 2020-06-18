@@ -34,13 +34,15 @@ class User {
     }
 
     async validateOrCreate() {
+        /* If user doesn't exist, insert data, else get id*/
         if (!(await this.exists())) {
-            let result = await this.insert();
+            await this.insert();
+            let result = await knex('user').where({google_id: this.google_id});
             this.id = result[0].id;
         } else {
             let result = await knex('user').where({google_id: this.google_id});
-            this.name = result[0].name;
             this.id = result[0].id;
+            this.name = result[0].name;
             this.email = result[0].email;
             this.google_id = result[0].google_id;
         }
