@@ -32,6 +32,7 @@ const getLastYearsLog = async () => {
     })
     
     result = await result.json();
+    console.log(result)
     
     // create an array of languages
     let languages = [];
@@ -53,7 +54,7 @@ const getLastYearsLog = async () => {
         result.forEach((object) => {
             if (object.language == language) {
                 
-                graphObj.individualTimes[monthsThisYear.indexOf(object.date)] = Math.round(object.time/60 * 100)/100;
+                graphObj.individualTimes[monthsThisYear.indexOf(object.date-1)] = Math.round(object.time/60 * 100)/100;
                 
             }
         })
