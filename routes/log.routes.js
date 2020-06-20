@@ -37,7 +37,6 @@ router.post('/delete', async (req, res) => {
 })
 
 router.post('/getLastWeek', async (req, res) => {
-    console.log(req.user)
     let result = await knex('log')
     .join('language', 'language.id', 'log.language_id')
     .select(knex.raw("DATE_FORMAT(log.date, '%Y-%m-%d') as date, sum(log.time) as time, language.name as language"))
@@ -102,8 +101,6 @@ router.post('/getAllTime', async (req, res) => {
     .groupBy('language_id')
     .orderBy('language_id')
     .orderBy('year', 'asc')
-
-    console.log(result)
 
     res.send(result);
 })
