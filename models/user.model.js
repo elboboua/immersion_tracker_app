@@ -17,6 +17,7 @@ class User {
         this.name = result[0].name;
         this.email = result[0].email;
         this.google_id = result[0].google_id;
+        this.username = result[0].username;
     }
 
     async exists() {
@@ -45,6 +46,7 @@ class User {
             this.name = result[0].name;
             this.email = result[0].email;
             this.google_id = result[0].google_id;
+            this.username = result[0].username;
         }
     }
 
