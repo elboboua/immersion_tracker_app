@@ -32,7 +32,6 @@ const getLastYearsLog = async () => {
     })
     
     result = await result.json();
-    console.log(result)
     
     // create an array of languages
     let languages = [];
