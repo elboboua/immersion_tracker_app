@@ -1,0 +1,53 @@
+<style>
+    #dashboard {
+        margin: auto;
+        margin-top: 20px;
+        width: fit-content;
+    }
+
+    #dashboard-header {
+        background-color: #443266;
+        color: white;
+    }
+
+    #avatar {
+        width: 50px;
+        border-radius: 50%;
+        margin-right: 7px;
+    }
+
+    #logged-hours {
+        display: inline-block;
+        font-size: 2.5em;
+    }
+
+    #logged-hours-text {
+        display: inline-block;
+        font-size: 0.75em;
+        width: 40px;
+        text-align: left;
+    }
+
+    #dashboard-body {
+        margin: 10px
+    }
+    
+    #plus-button {
+        margin-bottom: 15px;
+        margin-left: 30px;
+    }
+
+</style>
+
+<div id="dashboard" class="card">
+    <div id="dashboard-header" class="card-header">
+        <span><img id="avatar" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png">@ahmadelbobou</span>
+    </div>
+    <div id="dashboard-body">
+        <span id="logged-hours">10</span>
+        <span id="logged-hours-text">hours logged</span>
+        {{> input-modal}}
+    </div>
+
+
+</div>
