@@ -13,7 +13,7 @@
     #avatar {
         width: 50px;
         border-radius: 50%;
-        margin-right: 7px;
+        margin-right: 15px;
     }
 
     #logged-hours {
@@ -34,20 +34,35 @@
     
     #plus-button {
         margin-bottom: 15px;
-        margin-left: 30px;
+        margin-left: 60px;
     }
 
 </style>
 
 <div id="dashboard" class="card">
     <div id="dashboard-header" class="card-header">
-        <span><img id="avatar" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png">@ahmadelbobou</span>
+        <img id="avatar" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"><span id='username'>Loading ...</span>
     </div>
     <div id="dashboard-body">
-        <span id="logged-hours">10</span>
+        <span id="logged-hours">00</span>
         <span id="logged-hours-text">hours logged</span>
         {{> input-modal}}
     </div>
 
 
 </div>
+
+<script>
+    let loadDashboard = async () => {
+        let username = document.getElementById('username');
+        let loggedHours = document.getElementById('logged-hours')
+        let result = await fetch('/account/get-dashboard-info');
+        result = await result.json()
+        username.innerHTML = `@${result.username}`;
+        loggedHours.innerHTML = Math.floor(result.loggedHours/60);
+
+    }
+
+    loadDashboard()
+
+</script>

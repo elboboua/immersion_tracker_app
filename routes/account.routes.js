@@ -21,5 +21,14 @@ router.get('/update-username/:username', async (req,res) => {
     }
 })
 
+router.get('/get-dashboard-info', async (req, res) => {
+    let loggedHours = await knex('log').select(knex.raw('sum(time) as time')).where({user_id: req.user.id}).andWhere('deleted', '=', 0)
+    loggedHours = (loggedHours[0].time)
+    res.send({
+        username: req.user.username,
+        loggedHours
+    });
+})
+
 
 module.exports = router;
