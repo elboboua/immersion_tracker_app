@@ -44,7 +44,7 @@
     <div id="dashboard-header" class="card-header">
         <a href="/account/upload-avatar">
 
-            <img  id="avatar" class="img-fluid" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png">
+            <img  id="avatar" class="img-fluid">
         </a>
         <span id='username'>Loading ...</span>
     </div>
@@ -69,7 +69,7 @@
         let imageName = await fetch('/account/avatar');
         imageName = await imageName.json();
         let avatar = document.getElementById('avatar');
-        avatar.src = `/imgs/avatars/${imageName.avatar_name}`;
+        avatar.src = `/imgs/avatars/${imageName.avatar_name || 'default.png'}`;
 
     
 
