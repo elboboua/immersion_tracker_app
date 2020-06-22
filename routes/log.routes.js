@@ -18,7 +18,8 @@ router.post('/create', async (req, res) => {
         language_id: parseInt(req.body.language_id),
         type_id: parseInt(req.body.type_id),
         time: req.body.time,
-        date: req.body.date
+        date: req.body.date,
+        date_created: new Date().toISOString().slice(0,10),
     }
     let result = await knex('log').insert(log);
     //res.send(result[0].id)
