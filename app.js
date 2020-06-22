@@ -8,6 +8,7 @@ const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const hbs = require('express-handlebars');
 const cors = require('cors')
+const morgan = require('morgan')
 
 const authRoutes = require('./routes/auth.routes');
 const logRoutes = require('./routes/log.routes');
@@ -32,6 +33,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors())
 app.use(express.static('public'))
+app.use(morgan('dev'));
 
 app.set('view engine', 'hbs');
 app.engine('hbs', hbs({

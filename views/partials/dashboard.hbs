@@ -12,8 +12,10 @@
 
     #avatar {
         width: 50px;
+        height: 50px;
         border-radius: 50%;
         margin-right: 15px;
+        overflow: hidden;
     }
 
     #logged-hours {
@@ -41,7 +43,10 @@
 
 <div id="dashboard" class="card">
     <div id="dashboard-header" class="card-header">
-        <img id="avatar" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png"><span id='username'>Loading ...</span>
+        <a href="/account/upload-avatar">
+            <img  id="avatar" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png">
+        </a>
+        <span id='username'>Loading ...</span>
     </div>
     <div id="dashboard-body">
         <span id="logged-hours">00</span>
@@ -60,6 +65,13 @@
         result = await result.json()
         username.innerHTML = `@${result.username}`;
         loggedHours.innerHTML = Math.floor(result.loggedHours/60);
+
+        let imageName = await fetch('/account/avatar');
+        imageName = await imageName.json();
+        let avatar = document.getElementById('avatar');
+        avatar.src = `/imgs/avatars/${imageName.avatar_name}`;
+
+    
 
     }
 
