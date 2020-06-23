@@ -7,6 +7,14 @@ router.get('/getAllLogs', async (req, res) => {
     res.send(result);
 })
 
+router.get('/sumByType', async (req,res) => {
+    let result = await knex('log')
+    .join('type', 'type.id', 'log.type_id')
+    .select(knex.raw("type.name, sum(time) as time"))
+    .groupBy('type.id')
+    .orderBy('time', 'desc')
+    res.send(result);
+})
 
 
 router.post('/getLastWeek', async (req, res) => {

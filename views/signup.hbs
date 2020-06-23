@@ -35,6 +35,10 @@
     }
 
     #user-logs {
+        margin-top: 40px;
+    }
+
+    #pie-graph-container {
         margin-top: 20px;
     }
 
@@ -45,10 +49,11 @@
 <div class="container" >
     <div class="row align-items-center">
 
-        <div id="graph-container" class="col-sm-8 graph-container"></div>
+        <div id="graph-container" class="col-md-8 graph-container"></div>
+        
 
 
-        <div class="col-sm-4" id="signup-form">
+        <div class="col-md-4" id="signup-form">
             <div id='motivation-message'>
                 <h3>Log your language learning and see your progress!</h3>
                 
@@ -64,6 +69,9 @@
             </div>
         </div>        
         
+    </div>
+    <div class="row">
+        <div id="pie-graph-container" class="col"></div>
     </div>
     <div id="user-logs" class="row justify-content-center">
         <div class="col-sm-8">
@@ -83,9 +91,11 @@
             </table>
         </div>
     </div>
+    
 </div>
 
 <script src="/ChartJS/Chart.js"></script>
 <script src="/js/createGraph.js"></script>
 <script src="/js/analyticsWeek.homepage.js"></script>
 <script src="/js/getLogs.homepage.js"></script>
+<script src="/js/pieGraph.homepage.js"></script>
