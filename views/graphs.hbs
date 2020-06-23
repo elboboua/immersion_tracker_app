@@ -15,21 +15,40 @@
 
 
     {{!-- Graphs --}}
-    <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
-        <label class="btn btn-secondary active">
-            <input type="radio" name="options" id="week-button" autocomplete="off" checked> Week
-        </label>
-        <label class="btn btn-secondary">
-            <input type="radio" name="options" id="month-button" autocomplete="off"> Month
-        </label>
-        <label class="btn btn-secondary">
-            <input type="radio" name="options" id="year-button" autocomplete="off"> Year
-        </label>
-    </div>
+    
+    
+            <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="webutton" autocomplete="off" checked> All
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="mobutton" autocomplete="off"> Posts
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="yebutton" autocomplete="off"> Suggestions
+                </label>
+            </div>
+            {{> cards}}
+        
+        {{!-- <div class="col-sm-8">
+            <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="week-button" autocomplete="off" checked> Week
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="month-button" autocomplete="off"> Month
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="year-button" autocomplete="off"> Year
+                </label>
+            </div>
 
-    <div id="graph-container-week" class="container"></div>
-    <div id="graph-container-month" class="container" ></div>
-    <div id="graph-container-year" class="container" ></div>
+            <div id="graph-container-week" class="container"></div>
+            <div id="graph-container-month" class="container" ></div>
+            <div id="graph-container-year" class="container" ></div>
+        </div> --}}
+
+    </div>
 </div>
 
 <script>
