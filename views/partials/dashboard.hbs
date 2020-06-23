@@ -17,16 +17,25 @@
         margin-right: 15px;
     }
 
-    #logged-hours {
+    .stat-number {
         display: inline-block;
         font-size: 2.5em;
     }
 
-    #logged-hours-text {
+    #logged-hours {
+
+    }
+
+    .mini-words {
         display: inline-block;
         font-size: 0.75em;
         width: 40px;
         text-align: left;
+    }
+
+    #logged-hours-text {
+
+        
     }
 
     #dashboard-body {
@@ -35,7 +44,8 @@
     
     #plus-button {
         margin-bottom: 15px;
-        margin-left: 60px;
+        margin-left: 30px;
+        margin-right: 30px;
     }
 
 </style>
@@ -49,9 +59,11 @@
         <span id='username'>Loading ...</span>
     </div>
     <div id="dashboard-body">
-        <span id="logged-hours">00</span>
-        <span id="logged-hours-text">hours logged</span>
+        <span id="logged-hours" class="stat-number">00</span>
+        <span id="logged-hours-text" class="mini-words">hours logged</span>
         {{> input-modal}}
+        <span id="streak" class="stat-number">0</span>
+        <span id="streak-text" class="mini-words">day streak</span>
     </div>
 
 

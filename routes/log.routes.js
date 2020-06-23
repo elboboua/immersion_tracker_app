@@ -4,7 +4,13 @@ const knex = require('../config/KnexConnection');
 // get all logs for a user
 router.get('/getAllLogs', async (req, res) => {
 
-    let result = await knex('log').where({user_id: req.user.id, deleted: false}).orderBy('id', 'desc');
+    let result = await knex('log').where({user_id: req.user.id, deleted: false}).orderBy('date_created', 'desc');
+    res.send(result);
+})
+
+router.get('/getLogsDate', async (req, res) => {
+
+    let result = await knex('log').select(knex.raw("distinct(DATE_FORMAT(date_created, '%Y-%m-%d')) as date")).where({user_id: req.user.id, deleted: false}).orderBy('date', 'desc');
     res.send(result);
 })
 
