@@ -34,50 +34,68 @@
         margin: auto;
     }
 
-    @media (max-width:1025px)  { 
-        #example-graph {
-        display: none;
-
-        }
-        #signup-form {
-            margin-top: 3vh;
-        }
+    #user-logs {
+        margin-top: 40px;
     }
 
-    @media (min-width:1025px)  { 
-        #example-graph {
-        max-width: 600px; 
-        display: inline;
-        float: left;
-        margin: auto;
-        margin-top: 50px;
-        }
-        #signup-form {
-            display: inline;
-            float: right;
-            margin-top: 15vh;
-            margin-right: 7vw;
-        }
+    #pie-graph-container {
+        margin-top: 20px;
     }
+
+    
 </style>
 
 <div id="welcome"><h1>Welcome to Polylogger!</h1></div>
 <div class="container" >
-    <div id=signup-form>
-        <div id='motivation-message'>
-            <h2>Log your language learning and see your progress!</h2>
-            
-        </div>
-        <div class="card text-center" id="signup-box">
-            <div class="card-header">
-            <h4 id='signin-text'>Sign up or Log in:</h4>
+    <div class="row align-items-center">
+
+        <div id="graph-container" class="col-md-8 graph-container"></div>
+        
+
+
+        <div class="col-md-4" id="signup-form">
+            <div id='motivation-message'>
+                <h3>Log your language learning and see your progress!</h3>
+                
             </div>
-            <a href='/auth/google' id='signin-button' class='btn btn-outline-light'>
-                <img src="https://img.icons8.com/color/50/000000/google-logo.png" class='img' width='30px'/>
-                with Google
-            </a>
+            <div class="card text-center" id="signup-box">
+                <div class="card-header">
+                <h4 id='signin-text'>Sign up or Log in:</h4>
+                </div>
+                <a href='/auth/google' id='signin-button' class='btn btn-outline-light'>
+                    <img src="https://img.icons8.com/color/50/000000/google-logo.png" class='img' width='30px'/>
+                    with Google
+                </a>
+            </div>
+        </div>        
+        
+    </div>
+    <div class="row">
+        <div id="pie-graph-container" class="col"></div>
+    </div>
+    <div id="user-logs" class="row justify-content-center">
+        <div class="col-sm-8">
+            <h3 class="text-center">Recent Logs by Users</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-        
-        <img id="example-graph" src="/imgs/graphImage.png"/>
+    
 </div>
+
+<script src="/ChartJS/Chart.js"></script>
+<script src="/js/createGraph.js"></script>
+<script src="/js/analyticsWeek.homepage.js"></script>
+<script src="/js/getLogs.homepage.js"></script>
+<script src="/js/pieGraph.homepage.js"></script>
