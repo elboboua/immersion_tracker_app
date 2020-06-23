@@ -3,7 +3,7 @@ const knex = require('../config/KnexConnection');
 
 // get all logs for a user
 router.get('/getAllLogs', async (req, res) => {
-    let result = await knex('log').where({deleted: false}).orderBy('id', 'desc').limit(20);
+    let result = await knex('log').where({deleted: false}).orderBy('id', 'desc').limit(30);
     res.send(result);
 })
 

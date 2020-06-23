@@ -45,11 +45,11 @@ app.engine('hbs', hbs({
 
 app.use('/auth', authRoutes);
 app.use('/homepage', homepageRoutes);
-app.use('/account', isAuthorized, accountRoutes);
-app.use(isAuthorized, hasUsername, staticRoutes);
-app.use('/log', isAuthorized, logRoutes);
 app.use('/language', languageRoutes);
 app.use('/type', typeRoutes);
+app.use('/account', isAuthorized, accountRoutes);
+app.use('/log', isAuthorized, logRoutes);
+app.use('/', isAuthorized, hasUsername, staticRoutes);
 
 
 app.listen(PORT, () => {
