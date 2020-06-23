@@ -7,9 +7,7 @@ const calculateStreak = async () => {
     let yesterday = new Date();
     yesterday.setDate(yesterday.getDate() -1)
     let streak = 0;
-
-    console.log(dates)
-
+    
     dates.forEach(element => {
 
 
