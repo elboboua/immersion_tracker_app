@@ -1,0 +1,105 @@
+<style>
+    #dashboard {
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    #dashboard-header {
+        background-color: #443266;
+        color: white;
+    }
+
+    #avatar-username {
+        display: inline-block;
+        float: left;
+
+    }
+
+    #avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        background-color: gray;
+    }
+
+    .stat-number {
+        display: inline-block;
+        font-size: 2.5em;
+        margin-right: 5px;
+    }
+
+
+    .mini-words {
+        display: inline-block;
+        font-size: 0.75em;
+        width: 50px;
+        text-align: left;
+    }
+
+    #challenge {
+        width: 90px;
+    }
+
+    #dashboard-body {
+        margin: 10px
+    }
+    
+    #plus-button {
+        margin-bottom: 15px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    #follower-following-span {
+        display: inline-block;
+        float: right;
+        margin-top: 7px;
+    }
+
+</style>
+
+<div id="dashboard" class="card">
+    <div id="dashboard-header" class="card-header">
+        <span id="avatar-username">
+            <a href="/account/upload-avatar">
+
+            <img  id="avatar" class="img-fluid">
+        </a>
+        <span id='username'>Loading ...</span>
+        </span>
+        
+        <span id='follower-following-span'>100 Followers | 20 Following</span>
+    </div>
+    <div id="dashboard-body">
+        <span id="logged-hours" class="stat-number">00</span>
+        <span id="logged-hours-text" class="mini-words">hours logged</span>
+        <span id="streak" class="stat-number">0</span>
+        <span id="streak-text" class="mini-words">day streak</span>
+        {{> input-modal}}
+        <span class="stat-number">50%</span>
+        <span id="challenge" class="mini-words">100 Day Challenge</span>
+    </div>
+</div>
+
+<script>
+    let loadDashboard = async () => {
+        let username = document.getElementById('username');
+        let loggedHours = document.getElementById('logged-hours')
+        let result = await fetch('/account/get-dashboard-info');
+        result = await result.json()
+        username.innerHTML = `@${result.username}`;
+        loggedHours.innerHTML = Math.floor(result.loggedHours/60);
+
+        let imageName = await fetch('/account/avatar');
+        imageName = await imageName.json();
+        let avatar = document.getElementById('avatar');
+        avatar.src = `/imgs/avatars/${imageName.avatar_name || 'default.png'}`;
+
+    
+
+    }
+
+    loadDashboard()
+
+</script>

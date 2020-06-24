@@ -19,5 +19,9 @@ router.get('/analyticsYear', (req, res) => {
     res.render('analyticsYear')
 })
 
+router.get('/new-homepage', (req, res) => {
+    res.render('new-homepage')
+});
+
 
 module.exports = router;
