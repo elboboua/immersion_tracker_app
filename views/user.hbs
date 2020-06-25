@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/css/homepage.css">
+
+
+{{> navbar-signup}}
+
+<div class="container-fluid">
+
+            {{> user-dashboard this}}
+
+            <div class="row">
+                <div class="col-md container overflow-auto order-md-12 feed-data-col  text-center">
+                    {{!-- Graphs --}}
+                    <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="week-button" autocomplete="off" checked> Week
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="month-button" autocomplete="off"> Month
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="year-button" autocomplete="off"> Year
+                        </label>
+                    </div>
+
+                    <div id="graph-container-week"></div>
+                    <div id="graph-container-month"></div>
+                    <div id="graph-container-year"></div>
+                </div>
+                <div class="col-md container overflow-auto order-md-1 feed-data-col">
+                    {{>getLogs}}
+                </div>
+            </div>
+       
+
+</div>
+
+<script>
+    let user = {
+        username: window.location.href.split('/')[4]
+    }; 
+</script>
+<script src="/js/user/loadDashboard.js"></script>
+<script src="/js/user/getLogs.js"></script>
+<script src="/ChartJS/Chart.js"></script>
+<script src="/js/graphButtons.js"></script>
+<script src="/js/createGraph.js"></script>
+<script src="/js/user/analyticsWeek.js"></script>
+<script src="/js/user/analyticsMonth.js"></script>
+<script src="/js/user/analyticsYear.js"></script>
+<script src="/js/user/calculate-streak.js"></script>

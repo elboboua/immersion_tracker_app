@@ -17,6 +17,7 @@ const typeRoutes = require('./routes/type.routes');
 const staticRoutes = require('./routes/static.routes');
 const accountRoutes = require('./routes/account.routes');
 const homepageRoutes = require('./routes/homepage.routes')
+const userRoutes = require('./routes/user.routes')
 
 const {isAuthorized} = require('./middleware/authchecker');
 const {hasUsername} = require('./middleware/username_checker');
@@ -43,6 +44,7 @@ app.engine('hbs', hbs({
 }))
 
 
+app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/homepage', homepageRoutes);
 app.use('/language', languageRoutes);
