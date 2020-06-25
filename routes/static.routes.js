@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
+router.get('/stats', (req, res) => {
     res.render('graphs')
 });
 router.get('/createLog', (req, res) => {
@@ -19,8 +19,8 @@ router.get('/analyticsYear', (req, res) => {
     res.render('analyticsYear')
 })
 
-router.get('/new-homepage', (req, res) => {
-    res.render('new-homepage')
+router.get('/', (req, res) => {
+    res.render('homepage')
 });
 
 

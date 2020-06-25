@@ -1,6 +1,4 @@
 
-document.getElementById('log-button').className += ' active';
-
 // create a single object from multiple objects
 const getLogs = async () => {
 
