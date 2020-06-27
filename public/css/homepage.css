@@ -107,3 +107,13 @@ box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
     margin-top: 15px;
 }
 
+.nav-link-icon, .nav-link-text {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.icon {
+    width: 1.75em;
+    height: 1.75em;
+}
+
