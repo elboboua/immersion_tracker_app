@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="/css/homepage.css">
 
 <div id="dashboard" class="card">
-    <div id="dashboard-header" class="card-header">
+    <div id="dashboard-header" class="card-header text-center">
         <a href="/account/upload-avatar">
 
             <img  id="avatar" class="img-fluid">
@@ -9,11 +10,19 @@
         <span id='username'>Loading ...</span>
     </div>
     <div id="dashboard-body">
-        <span id="logged-hours" class="stat-number">00</span>
-        <span id="logged-hours-text" class="mini-words">hours logged</span>
-                {{> input-modal}}
-        <span id="streak" class="stat-number">0</span>
-        <span id="streak-text" class="mini-words">day streak</span>
+        <span>
+            <span id="logged-hours" class="stat-number">...</span>
+            <span id="logged-hours-text" class="mini-words">hours logged</span>
+        </span>
+        {{#if public}}
+        {{else}}
+            {{> input-modal}}
+        {{/if}}
+        <span>
+            <span id="streak" class="stat-number">...</span>
+            <span id="streak-text" class="mini-words">day streak</span> 
+        </span>
+        
     </div>
 
 

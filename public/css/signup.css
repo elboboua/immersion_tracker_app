@@ -1,0 +1,37 @@
+#welcome {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+#signup-form {
+    max-width: 300px; 
+    margin: auto; 
+}
+
+
+#motivation-message {
+    text-align: center;
+    color: rgb(0, 0, 0, 0.7);
+}
+
+#signup-box {
+    background-color: #443266;
+    padding: 20px; 
+    margin-top: 20px;
+}
+#signin-text {
+    color: white;
+}
+
+#signin-button {
+    margin: auto;
+}
+
+#user-logs {
+    margin-top: 40px;
+}
+
+#pie-graph-container {
+    margin-top: 20px;
+}

@@ -14,7 +14,7 @@ body {
     margin-bottom: 10px;
 }
 
-#new-navbar {
+#navbar {
     background-color: #443266;
 }
 
@@ -72,26 +72,27 @@ font-weight: 500;
 color: #443266;
 }
 
-.sidebar .nav-link .feather {
+.sidebar .nav-link {
+margin-left: 10px;
 margin-right: 4px;
-color: #999;
+margin-top: 10px;
+color: #454545;
 }
 
 .sidebar .nav-link.active {
-color: #C7A4CF;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-color: inherit;
+border-radius: 20px;
+color: #FFF;
+background-color: #443266;
+width: fit-content;
 }
 
 .sidebar-heading {
 font-size: .75rem;
 text-transform: uppercase;
 }
+
 .navbar .navbar-toggler {
-top: .25rem;
+top: .5rem;
 right: 1rem;
 }
 
@@ -128,3 +129,4 @@ box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 #logout-link {
     margin-top: 20px;
 }
+

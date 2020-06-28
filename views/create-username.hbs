@@ -1,46 +1,8 @@
-<style>
-    #prompt {
-        margin: 10px auto;
-        text-align: center;
+<link rel="stylesheet" href="/css/homepage.css">
+<link rel="stylesheet" href="/css/more-info.css">
+<link rel="stylesheet" href="/css/create-username.css">
 
-    }
-
-    #username-box {
-        max-width: 500px;
-        margin: auto;
-    }
-
-    #username-form {
-        margin: 15px;
-    }
-
-    #username-message {
-        border-radius: 15px;
-        display: none;
-        width: auto;
-        margin: auto;
-        margin-bottom: 15px;
-        padding:5px;
-    }
-    #loader {
-        display: none;
-        margin: auto;
-        margin-bottom: 10px;
-        border: 6px solid #f3f3f3; /* Light grey */
-        border-top: 6px solid #443266; /* Blue */
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-</style>
-
-{{> navbar-signup}}
+{{> navbar public=true}}
 
 
 <div id="prompt"><h3>Please create a username!</h3></div>
