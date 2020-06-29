@@ -21,6 +21,7 @@ const userRoutes = require('./routes/user.routes')
 
 const {isAuthorized} = require('./middleware/authchecker');
 const {hasUsername} = require('./middleware/username_checker');
+const {hasFocusLang} = require('./middleware/focus_language_checker');
 
 const app = express();
 
@@ -51,7 +52,7 @@ app.use('/language', languageRoutes);
 app.use('/type', typeRoutes);
 app.use('/account', isAuthorized, accountRoutes);
 app.use('/log', isAuthorized, logRoutes);
-app.use('/', isAuthorized, hasUsername, staticRoutes);
+app.use('/', isAuthorized, hasUsername, hasFocusLang, staticRoutes);
 
 
 app.listen(PORT, () => {

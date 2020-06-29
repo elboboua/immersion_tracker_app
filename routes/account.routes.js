@@ -23,7 +23,7 @@ router.post('/upload-avatar', upload.single('avatar'), async (req, res) => {
     if (!req.file) {
         return res.render('upload-avatar', {message: "There has been a problem uploading the file. Please try again."})
       } else {
-        let result = await knex('user').where({id: req.user.id}).update({avatar_name: req.file.filename});
+        await knex('user').where({id: req.user.id}).update({avatar_name: req.file.filename});
         return res.redirect('/')
         
       }
@@ -61,6 +61,22 @@ router.get('/get-dashboard-info', async (req, res) => {
         username: req.user.username,
         loggedHours
     });
+})
+
+router.get('/get-focus-language', async (req, res) => {
+    let result = await knex('user').select('focus_language_id').where({id: req.user.id});
+    res.send(result);
+})
+
+router.get('/add-focus-language', (req, res) => {
+    res.render('add-focus-language');
+})
+
+router.post('/set-focus-language', async (req, res) => {
+    await knex('user')
+    .update({focus_language_id: req.body.language_id})
+    .where({id: req.user.id});
+    res.redirect('/')
 })
 
 

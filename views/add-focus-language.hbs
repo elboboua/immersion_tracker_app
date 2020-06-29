@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/css/homepage.css">
+<link rel="stylesheet" href="/css/more-info.css">
+<link rel="stylesheet" href="/css/create-username.css">
+
+{{> navbar public=true}}
+
+
+<div id="prompt">
+    <h3>Please add a focus language!</h3>
+    <small>This makes it easier to create language logs. Use this for the language you log the most.</small>
+</div>
+<div class="container">
+    <div id="username-form">
+        <div class="card text-center" id="username-box">
+            <form id="username-form" method="POST" action="/account/set-focus-language">
+                {{!-- // name of log --}}
+                <div class="form-group">
+                    <div class="col">
+                        <label for="language">Language:</label>
+                        <select class="form-control" name="language_id" id="language" required></select>
+                    </div>
+                </div>  
+                <button id="submit-button" type="submit" value="submit" class="btn btn-block form-group" style="background-color: #443266; color: white;">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const getLanguages = async () => {
+        let languageSelector = document.getElementById('language');
+        let result = await fetch('/language');
+        result = await result.json()
+        
+        for (let i = 0; i < result.length; i++) {
+            let option = document.createElement('option');
+            option.value = result[i].id;
+            option.text = result[i].name;
+            languageSelector.appendChild(option)
+        }
+
+        let focusLang = await fetch('/account/get-focus-language');
+        focusLang = await focusLang.json();
+        languageSelector.value = focusLang[0].focus_language_id || 0;
+    }
+
+    getLanguages();
+</script>

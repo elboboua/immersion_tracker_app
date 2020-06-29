@@ -13,6 +13,10 @@ const getLanguages = async () => {
         option.text = result[i].name;
         languageSelector.appendChild(option)
     }
+
+    let focusLang = await fetch('/account/get-focus-language');
+    focusLang = await focusLang.json();
+    languageSelector.value = focusLang[0].focus_language_id || 0;
 }
 
 const getTypes = async () => {
