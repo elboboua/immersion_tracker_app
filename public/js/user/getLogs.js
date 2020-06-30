@@ -1,56 +1,92 @@
-
 // create a single object from multiple objects
 const getLogs = async () => {
 
-    let languageRes = await fetch('/language');
-    languageRes = await languageRes.json();
-
-    let languages = {}
-    languageRes.forEach((element) => {
-        languages[element.id] = element.name;
-    })
-
-
-    let result = await fetch(`/user/${user.username}/getAllLogs`);
+    let result = await fetch(`/user/${user.username}/getAllLogsWithLanguages`);
     result = await result.json();
 
-    let tableBody = document.getElementById('table-body')
+    let logContainer = document.getElementById('log-container')
     
     for (let i = 0; i < result.length; i++) {
-        let row = document.createElement('tr');
-        row.id = 'row_' + result[i].id
+        let card = document.createElement('div');
+        card.id = 'card_' + result[0].id
+        card.className += " card log-card shadow";
 
-        let name = document.createElement('th');
-        let name_text = document.createTextNode(result[i].name);
-        name.appendChild(name_text);
-        row.appendChild(name);
+        let header = document.createElement('div');
+        header.className = 'card-header log-card-header';
 
-        let language = document.createElement('td');
-        let language_text = document.createTextNode(languages[result[i].language_id]);
-        language.appendChild(language_text);
-        row.appendChild(language);
+        let title = document.createElement('div');
+        title.className = 'header-row title'
+        title.innerText = result[i].name;
+        header.appendChild(title);
 
-        let time = document.createElement('td');
-        let time_text = document.createTextNode(result[i].time);
-        time.appendChild(time_text);
-        row.appendChild(time);
+        let deleteButton = document.createElement('div');
+        deleteButton.className = 'header-row delete-button';
+        deleteButton.id = 'delete_' + result[i].id;
+        deleteButton.innerHTML = '<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/><path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/></svg>'
+        header.appendChild(deleteButton);
+        card.appendChild(header);
 
-        let date = document.createElement('td');
+
+
+        let body = document.createElement('div');
+        body.className = 'card-body'
+
+        let firstLine = document.createElement('div');
+        firstLine.className = 'card-line';
+
+        let language = document.createElement('span');
+        language.innerText = result[i].language;
+        firstLine.appendChild(language);
+
+        let type = document.createElement('span');
+        type.className = 'right-info'
+        type.innerText = result[i].type;
+        firstLine.appendChild(type);
+
+
+        let secondLine = document.createElement('div');
+        secondLine.className = 'card-line';
+
+        let time = document.createElement('span');
+        time.innerText = result[i].time + ' minutes';
+        secondLine.appendChild(time);
+
+        let date = document.createElement('span');
+        date.className = 'right-info';
         let date_var = new Date(result[i].date);
-        let date_text = document.createTextNode(date_var.toLocaleDateString());
-        date.appendChild(date_text);
-        row.appendChild(date);
+        date.innerText = date_var.toLocaleDateString();
+        secondLine.appendChild(date);
 
-        let deleteButtonTD = document.createElement('td');
-        let deleteButton = document.createElement('div')
-        deleteButton.id = 'delete_' + result[i].id
-        deleteButton.className = 'text-center'
-        deleteButton.innerHTML = '<svg class="bi bi-trash-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/></svg>'
-        
+        body.appendChild(firstLine)
+        body.appendChild(secondLine)
+        card.appendChild(body);
+        logContainer.appendChild(card)
 
-        tableBody.appendChild(row)
+        // define function for delete button underneath the call to add the delete button to the DOM
+        deleteButton.addEventListener('click', (e) => {
+            let deletedCard = document.getElementById(deleteButton.id.replace('delete', 'card'));
+            let r = confirm('Are you sure you want to delete this log?')
+            if (r) {
+                deletedCard.style.display = 'none';
 
+                let request_body =  {
+                    id : deletedCard.id.replace('card_', '')
+                }
+
+                fetch('/log/delete', {
+                    method: 'post',
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify(request_body),
+                })
+            } else {
+                return;
+            }
+            
+        })
     }
     
 }
 getLogs();
+

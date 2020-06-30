@@ -7,6 +7,11 @@ router.get('/getAllLogs', async (req, res) => {
     res.send(result);
 })
 
+router.get('/getAllLogsWithLanguages', async (req, res) => {
+    let result = await logModels.getAllLogsJoinLanguage(req.user.id);
+    res.send(result);
+})
+
 router.get('/getLogsDate', async (req, res) => {
     let result = await logModels.getLogsDateByID(req.user.id);
     res.send(result);

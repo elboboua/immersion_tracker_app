@@ -1,0 +1,30 @@
+.log-card {
+    max-width: 900px;
+    margin: 10px 0px;
+}
+
+.log-card-header {
+    color: #FFF;
+    background-color: #443266;
+    font-weight: bold;
+}
+
+.header-row {
+    display: inline-block;
+}
+
+.delete-button {
+    float: right;
+}
+
+.title {
+    max-width: 85%;
+}
+
+.right-info {
+    float: right;
+}
+
+.card-line {
+    margin-bottom: 10px;
+}

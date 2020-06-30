@@ -27,6 +27,23 @@ router.get('/:username/getAllLogs', async (req, res) => {
     res.send(result);
 })
 
+router.get('/:username/getAllLogsWithLanguages', async (req, res) => {
+    let user = await knex('user').where({username: req.params.username});
+    let result = await knex('log')
+    .select('log.id')
+    .select('log.name')
+    .select('log.date')
+    .select('language.name as language')
+    .select('log.time')
+    .select('type.name as type')
+    .join('language', 'language.id', 'log.language_id' )
+    .join('type', 'type.id', 'log.type_id')
+    .where({user_id: user[0].id, deleted: false})
+    .orderBy('date_created', 'desc')
+    .orderBy('id', 'desc');
+    res.send(result);
+});
+
 router.get('/:username/getLogsDate', async (req, res) => {
     let user = await knex('user').where({username: req.params.username});
     let result = await knex('log').select(knex.raw("distinct(DATE_FORMAT(date_created, '%Y-%m-%d')) as date")).where({user_id: user[0].id, deleted: false}).orderBy('date', 'desc');

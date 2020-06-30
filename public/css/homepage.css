@@ -48,6 +48,8 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 .sidebar {
     top: 0.5rem;
     height: fit-content;
+    border-bottom: 1px solid #666;
+    border-top: 1px solid #666;
     
 }
 

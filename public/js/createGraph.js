@@ -5,7 +5,7 @@ const createLanguageGraph = (graphInfo, id, individualTimesString) => {
 
     // create a card
     let card = document.createElement('div');
-    card.className = 'card'
+    card.className = 'card shadow'
     card.style.padding = '10px'
     card.style.margin = '10px 0px'
     

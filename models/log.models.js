@@ -7,6 +7,21 @@ const getAllLogsByID = (id) => {
     .orderBy('id', 'desc');
 }
 
+const getAllLogsJoinLanguage = (id) => {
+    return knex('log')
+    .select('log.id')
+    .select('log.name')
+    .select('log.date')
+    .select('language.name as language')
+    .select('log.time')
+    .select('type.name as type')
+    .join('language', 'language.id', 'log.language_id' )
+    .join('type', 'type.id', 'log.type_id')
+    .where({user_id: id, deleted: false})
+    .orderBy('date_created', 'desc')
+    .orderBy('id', 'desc');
+}
+
 const getLogsDateByID = (id) => {
     return knex('log')
     .select(knex.raw("distinct(DATE_FORMAT(date_created, '%Y-%m-%d')) as date"))
@@ -83,6 +98,7 @@ const getAllTime = (rb, ru) => {
 
 module.exports = {
     getAllLogsByID,
+    getAllLogsJoinLanguage,
     getLogsDateByID,
     insertLog,
     deleteLog,
