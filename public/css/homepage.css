@@ -1,9 +1,9 @@
 body {
-    color: #443266;
+    color: #454545;
 }
 
 .table {
-    color: #443266;
+    color: #454545;
 }
 
 #log-form {
@@ -118,6 +118,8 @@ box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 
 .nav-link-icon, .nav-link-text {
     display: inline-block;
+    font-weight: bold;
+    font-size: large;
     margin-right: 10px;
 }
 

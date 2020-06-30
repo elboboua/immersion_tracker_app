@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="/css/homepage.css">
+<style>
+    #main-content {
+        margin: 10px;
+    }
+
+    .card {
+        margin: 10px auto;
+    }
+
+    .link-arrow-container {
+        float: right;
+        text-align: right;
+    }
+
+    .link-arrow {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+    a {
+        color: #454545;
+    }
+
+    a:hover {
+        color: #454545;
+        text-decoration: none;
+    }
+
+    #private-checkbox:checked {
+        background-color: #443266;
+    }
+
+</style>
+
+{{> navbar}}
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        {{> sidebar}}
+
+        <main id="main-content" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <a class="link" href="/account/create-username">
+                <div class="card">
+                    <div class="card-body">
+                        Change your username
+                        <span class="link-arrow-container">
+                            <svg class="link-arrow" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5H11a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            <a class="link" href="/account/upload-avatar">
+                <div class="card">
+                    <div class="card-body">
+                        Change your avatar
+                        <span class="link-arrow-container">
+                            <svg class="link-arrow" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5H11a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            <a class="link" href="/account/add-focus-language">
+                <div class="card">
+                    <div class="card-body">
+                        Change your focus language
+                        <span class="link-arrow-container">
+                            <svg class="link-arrow" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5H11a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            <div class="card">
+                <div class="card-body">
+                    Check to private your account
+                    <span class="link-arrow-container">
+                        <input type="checkbox" id="private-checkbox">
+                    </span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('settings-link').className += ' active'
+
+    let privateCheckbox = document.getElementById('private-checkbox');
+    fetch('/account/get-private')
+    .then(result => result.json())
+    .then(({private}) => {
+        if (private == 1) {
+            privateCheckbox.checked = true;
+        }
+
+        privateCheckbox.onchange = (e) => {
+            fetch('/account/toggle-private')
+        }
+
+    })
+</script>

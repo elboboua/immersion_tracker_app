@@ -72,6 +72,23 @@ router.get('/add-focus-language', (req, res) => {
     res.render('add-focus-language');
 })
 
+router.get('/get-private', async (req,res) => {
+    let result = await knex('user').select('private').where({id: req.user.id});
+    res.json({
+        private: result[0].private
+    })    
+})
+
+router.get('/toggle-private', async (req, res) => {
+    let result = await knex('user').select('private').where({id: req.user.id});
+    if (result[0].private === 0) {
+        await knex('user').update({private: 1}).where({id: req.user.id});
+    } else {
+        await knex('user').update({private: 0}).where({id: req.user.id});
+    }
+    res.send(200);
+})
+
 router.post('/set-focus-language', async (req, res) => {
     await knex('user')
     .update({focus_language_id: req.body.language_id})
