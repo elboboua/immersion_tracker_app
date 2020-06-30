@@ -1,3 +1,5 @@
+
+
 // get the dates for the request
 
 
@@ -5,13 +7,14 @@
 const getLastWeeksLog = async () => {
     let todayDate = new Date();
     let lastWeekDate = new Date();
-    lastWeekDate.setDate(todayDate.getDate() - 7)
-    today = todayDate.toJSON().slice(0,10) + 'T21:00:00.000Z'
-    lastWeek = lastWeekDate.toJSON().slice(0,10) + 'T21:00:00.000Z'
+    lastWeekDate.setDate(todayDate.getDate() - 6)
+    let today = todayDate.getFullYear() + '-' + (todayDate.getMonth()+1) + '-' + todayDate.getDate();
+    let lastWeek = lastWeekDate.getFullYear() + '-' + (lastWeekDate.getMonth()+1) + '-' + lastWeekDate.getDate(); 
     
     let datesThisWeek = [];
     for (let i = 1; i <= 7; i++) {
         let iter = new Date();
+        iter.setMonth(lastWeekDate.getMonth())
         iter.setDate(lastWeekDate.getDate() + i)
         datesThisWeek.push(iter.toJSON().slice(0,10));
     }

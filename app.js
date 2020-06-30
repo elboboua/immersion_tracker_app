@@ -18,10 +18,12 @@ const staticRoutes = require('./routes/static.routes');
 const accountRoutes = require('./routes/account.routes');
 const homepageRoutes = require('./routes/homepage.routes')
 const userRoutes = require('./routes/user.routes')
+const adminRoutes = require('./routes/admin.routes')
 
 const {isAuthorized} = require('./middleware/authchecker');
 const {hasUsername} = require('./middleware/username_checker');
 const {hasFocusLang} = require('./middleware/focus_language_checker');
+const {isAdmin} = require('./middleware/admin_checker');
 
 const app = express();
 
@@ -54,6 +56,7 @@ app.use('/type', typeRoutes);
 app.use('/account', isAuthorized, accountRoutes);
 app.use('/log', isAuthorized, logRoutes);
 app.use('/', isAuthorized, hasUsername, hasFocusLang, staticRoutes);
+app.use('/admin', isAdmin, adminRoutes);
 
 
 app.listen(PORT, () => {
