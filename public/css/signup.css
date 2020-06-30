@@ -19,6 +19,7 @@
     background-color: #443266;
     padding: 20px; 
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 #signin-text {
     color: white;
@@ -35,3 +36,4 @@
 #pie-graph-container {
     margin-top: 20px;
 }
+
