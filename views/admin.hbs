@@ -117,7 +117,8 @@
             let row = document.createElement('tr')
             let username = document.createElement('td');
             let link = document.createElement('a');
-            link.href = `/user/${user.username}`
+            link.href = `/user/${user.username}`;
+            link.target = '_blank';
             if (user.username.length > 20) {
                 link.innerText = user.username.slice(0,20) + '...';
             } else {
@@ -140,7 +141,8 @@
             let row = document.createElement('tr')
             let username = document.createElement('td');
             let link = document.createElement('a');
-            link.href = `/user/${user.username}`
+            link.href = `/user/${user.username}`;
+            link.target = '_blank'
             if (user.username.length > 20) {
                 link.innerText = user.username.slice(0,20) + '...';
             } else {

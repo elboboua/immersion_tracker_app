@@ -18,7 +18,7 @@ router.get('/count-logs', async (req, res) => {
 
 router.get('/count-hours', async (req, res) => {
     let result = await knex('log').select(knex.raw('sum(time) as minutes')).where('deleted', '=', '0');
-    result[0].hours = result[0].minutes/60;
+    result[0].hours = Math.round(result[0].minutes/60);
     res.send(result[0]);
 })
 
