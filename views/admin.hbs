@@ -118,7 +118,11 @@
             let username = document.createElement('td');
             let link = document.createElement('a');
             link.href = `/user/${user.username}`
-            link.innerText = user.username;
+            if (user.username.length > 20) {
+                link.innerText = user.username.slice(0,20) + '...';
+            } else {
+                link.innerText = user.username;
+            }
             let logs = document.createElement('td');
             logs.innerText = user.count;
             username.appendChild(link)
@@ -137,7 +141,11 @@
             let username = document.createElement('td');
             let link = document.createElement('a');
             link.href = `/user/${user.username}`
-            link.innerText = user.username;
+            if (user.username.length > 20) {
+                link.innerText = user.username.slice(0,20) + '...';
+            } else {
+                link.innerText = user.username;
+            }
             let logs = document.createElement('td');
             logs.innerText = user.count;
             username.appendChild(link)
