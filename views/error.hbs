@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/homepage.css">
+<style> 
+    .card {
+        margin: 20px auto;
+    }
+
+    .card-header {
+        color: white;
+        background-color: #443266;
+    }
+</style>
+{{> navbar public=true}}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            {{error}}
+        </div>
+        <div class="card-body">
+            {{message}}
+        </div>
+    </div>
+</div>
