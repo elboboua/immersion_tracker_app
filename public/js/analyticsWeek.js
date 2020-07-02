@@ -7,7 +7,7 @@
 const getLastWeeksLog = async () => {
     let todayDate = new Date();
     let lastWeekDate = new Date();
-    lastWeekDate.setDate(todayDate.getDate() - 6)
+    lastWeekDate.setDate(todayDate.getDate() - 7)
     let today = todayDate.getFullYear() + '-' + (todayDate.getMonth()+1) + '-' + todayDate.getDate();
     let lastWeek = lastWeekDate.getFullYear() + '-' + (lastWeekDate.getMonth()+1) + '-' + lastWeekDate.getDate(); 
     
