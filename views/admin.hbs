@@ -1,1 +1,59 @@
-<div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
+<style>
+    .stat-card {
+        width: auto;
+        margin: auto;
+    }
+
+    .stat-card .card-body {
+        padding: 20px;
+    }
+
+    .number-stat {
+        font-size: 2rem;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
+    <div class="card stat-card">
+        <div class="card-header">
+            Basic Stats
+        </div>
+        <div class="card-body">
+            <div id="users-stats">
+            </div>
+            <div id="logs-stats">
+            </div>
+            <div id="languages-stats">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const getUsers =  async () => {
+        let result = await fetch('/admin/count-users');
+        result = await result.json();
+        document.getElementById('users-stats').innerHTML = `<span class='number-stat'>${result.count}</span> users`;
+    }
+
+    const getLogs =  async () => {
+        let result = await fetch('/admin/count-logs');
+        result = await result.json();
+        document.getElementById('logs-stats').innerHTML = `<span class='number-stat'>${result.count}</span> logs`;
+    }
+
+    const getLanguages =  async () => {
+        let result = await fetch('/admin/count-languages');
+        result = await result.json();
+        document.getElementById('languages-stats').innerHTML = `<span class='number-stat'>${result.count}</span> languages`;
+    }
+
+    const getStats = () => {
+        getUsers();
+        getLogs();
+        getLanguages();
+    }
+
+    getStats();
+</script>
