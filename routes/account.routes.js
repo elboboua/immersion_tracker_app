@@ -10,9 +10,23 @@ let storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + '-' + file.originalname)
+    },
+    
+});
+let upload = multer({
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        if (file.mimetype == 'image/png' || file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg') {
+            cb(null, true);
+        } else {
+            req.fileValidationError = 'wrong file type!';
+            return cb(null, false, new Error('wrong file type!'));
+        }
+    },
+    limits: {
+        fileSize: 1000000
     }
 });
-let upload = multer({storage: storage});
 
 
 router.get('/create-username', async (req, res) => {
