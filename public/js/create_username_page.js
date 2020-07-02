@@ -11,13 +11,19 @@ usernameInput.oninput = async () => {
     usernameMessage.innerText = '';
     usernameMessage.className = '';
 
-    let res = /^[A-Za-z0-9 ]+$/.test(usernameInput.value)
+    let res = /^[a-zA-Z0-9]+$/.test(usernameInput.value)
     if (usernameInput.value.length == 0) {
         usernameMessage.style.display = 'none';
     } else if (res) {
         if (usernameInput.value.length > 4) {
             loader.style.display = 'block';
-            let result = await fetch(`/account/try-username/${usernameInput.value.toLowerCase()}`);
+            let result = await fetch(`/account/try-username/$`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username: usernameInput.value.toLowerCase()})
+            });
             loader.style.display = 'none';
             usernameMessage.style.display = 'block';
             if (result.status == 200) {
@@ -27,6 +33,7 @@ usernameInput.oninput = async () => {
             } else if (result.status == 409) {
                 usernameMessage.className = 'alert-danger'
                 usernameMessage.innerHTML = `<b>${usernameInput.value}</b> is not available`;
+                submitButton.disabled = true;
             }
         } else if (usernameInput.value.length > 0){
             usernameMessage.style.display = 'block';

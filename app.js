@@ -64,7 +64,7 @@ app.use('/admin', isAdmin, adminRoutes);
 // production error handler
 // no stacktraces leaked to user
 app.use('*', (req, res) => {
-    res.render('error', { error: 404, message: 'This page doesn\'t exist'});
+    res.render('error', { error: 404, message: 'This page doesn\'t exist.'});
 });
 
 app.listen(PORT, () => {
