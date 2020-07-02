@@ -56,8 +56,11 @@
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="new-button" autocomplete="off"> New
             </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="log-button" autocomplete="off"> Logs
+            </label>
         </div>
-        <table class="table">
+        <table id="user-table" class="table">
             <thead>
                 <tr>
                     <th scope="col">Username</th>
@@ -67,6 +70,14 @@
             <tbody hidden="true" id="new-user-body"></tbody>
             <tbody id="top-user-body"></tbody>
         </table>
+        <table hidden="true" id="log-table" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Log</th>
+                </tr>
+            </thead>
+            <tbody id="log-body"></tbody>
+        </table>
     </div>
 </div>
 
@@ -74,12 +85,20 @@
 
     const setButtons = () => {
         document.getElementById('top-button').onclick = () => {
+            document.getElementById('log-table').hidden = true;
+            document.getElementById('user-table').hidden = false;
             document.getElementById('new-user-body').hidden = true;
             document.getElementById('top-user-body').hidden = false;
         }
         document.getElementById('new-button').onclick = () => {
+            document.getElementById('log-table').hidden = true;
+            document.getElementById('user-table').hidden = false;
             document.getElementById('top-user-body').hidden = true;
             document.getElementById('new-user-body').hidden = false;
+        }
+        document.getElementById('log-button').onclick = () => {
+            document.getElementById('log-table').hidden = false;
+            document.getElementById('user-table').hidden = true;
         }
     }
 
@@ -162,6 +181,24 @@
         getNewUsers();
     }
 
+    const getLatestLogs = async () => {
+        let result = await fetch('/admin/get-latest-logs');
+        result = await result.json();
+
+        let logBody = document.getElementById('log-body')
+        result.forEach( log => {
+            let row = document.createElement('tr')
+            let activity = document.createElement('td');
+            let link = document.createElement('a');
+            link.href = `/user/${log.username}`;
+            link.target = '_blank';
+            link.innerText = log.activity;
+            activity.appendChild(link)
+            row.appendChild(activity);
+            logBody.appendChild(row);
+        })
+    }
+
     const loadPage = () => {
         getUsers();
         getLogs();
@@ -169,6 +206,7 @@
         getLanguages();
         getUsernames();
         setButtons();
+        getLatestLogs();
     }
 
     loadPage();

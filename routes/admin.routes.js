@@ -48,4 +48,16 @@ router.get('/get-new-users', async (req, res) => {
     res.send(result);
 })
 
+router.get('/get-latest-logs', async (req, res) => {
+    let result = await knex('log')
+                .join('user', 'user.id', 'log.user_id')
+                .join('language', 'language.id', 'log.language_id')
+                .select(knex.raw('user.username, log.name as activity, language.name as language'))
+                .where('user.username', '<>', '""')
+                .where('log.deleted', '=', '0')
+                .orderBy('log.id', 'desc')
+                .limit(50);
+    res.send(result);
+})
+
 module.exports = router;
