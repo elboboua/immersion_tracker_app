@@ -1,11 +1,25 @@
 <style>
+
+    #button-group {
+        margin:auto;
+        margin-bottom: 10px;
+    }
+
+    .row {
+        margin: 10px auto;
+    }
+
     .stat-card {
-        width: auto;
+        width: 100%;
         margin: auto;
     }
 
     .stat-card .card-body {
         padding: 20px;
+    }
+
+    .card-header {
+        font-size:  2rem;
     }
 
     .number-stat {
@@ -14,23 +28,62 @@
 </style>
 
 <div class="container-fluid">
-    <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
-    <div class="card stat-card">
-        <div class="card-header">
-            Basic Stats
+    <div class="row text-center">
+        <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
+    </div>
+    <div class="row">
+        <div class="card stat-card">
+            <div class="card-header">
+                Basic Stats
+            </div>
+            <div class="card-body">
+                <div id="users-stats">
+                </div>
+                <div id="logs-stats">
+                </div>
+                <div id="hours-stats">
+                </div>
+                <div id="languages-stats">
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div id="users-stats">
-            </div>
-            <div id="logs-stats">
-            </div>
-            <div id="languages-stats">
-            </div>
+    </div>
+    <div class="row">
+        <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="top-button" autocomplete="off" checked> Top
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="new-button" autocomplete="off"> New
+            </label>
         </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col"># of Logs</th>
+                </tr>
+            </thead>
+            <tbody hidden="true" id="new-user-body"></tbody>
+            <tbody id="top-user-body"></tbody>
+        </table>
     </div>
 </div>
 
 <script>
+
+    const setButtons = () => {
+        document.getElementById('top-button').onclick = () => {
+            document.getElementById('new-user-body').hidden = true;
+            document.getElementById('top-user-body').hidden = false;
+        }
+        document.getElementById('new-button').onclick = () => {
+            document.getElementById('top-user-body').hidden = true;
+            document.getElementById('new-user-body').hidden = false;
+        }
+    }
+
+
     const getUsers =  async () => {
         let result = await fetch('/admin/count-users');
         result = await result.json();
@@ -43,17 +96,70 @@
         document.getElementById('logs-stats').innerHTML = `<span class='number-stat'>${result.count}</span> logs`;
     }
 
+    const getHours =  async () => {
+        let result = await fetch('/admin/count-hours');
+        result = await result.json();
+        document.getElementById('hours-stats').innerHTML = `<span class='number-stat'>${result.hours}</span> hours`;
+    }
+
     const getLanguages =  async () => {
         let result = await fetch('/admin/count-languages');
         result = await result.json();
         document.getElementById('languages-stats').innerHTML = `<span class='number-stat'>${result.count}</span> languages`;
     }
 
-    const getStats = () => {
-        getUsers();
-        getLogs();
-        getLanguages();
+    const getTopUsers = async () => {
+        let result = await fetch('/admin/get-top-users');
+        result = await result.json();
+        
+        let topUserBody = document.getElementById('top-user-body')
+        result.forEach( user => {
+            let row = document.createElement('tr')
+            let username = document.createElement('td');
+            let link = document.createElement('a');
+            link.href = `/user/${user.username}`
+            link.innerText = user.username;
+            let logs = document.createElement('td');
+            logs.innerText = user.count;
+            username.appendChild(link)
+            row.appendChild(username);
+            row.appendChild(logs);
+            topUserBody.appendChild(row);
+        })
     }
 
-    getStats();
+    const getNewUsers = async () => {
+        let result = await fetch('/admin/get-new-users');
+        result = await result.json();
+        let newUserBody = document.getElementById('new-user-body')
+        result.forEach( user => {
+            let row = document.createElement('tr')
+            let username = document.createElement('td');
+            let link = document.createElement('a');
+            link.href = `/user/${user.username}`
+            link.innerText = user.username;
+            let logs = document.createElement('td');
+            logs.innerText = user.count;
+            username.appendChild(link)
+            row.appendChild(username);
+            row.appendChild(logs);
+            newUserBody.appendChild(row);
+        })
+    }
+
+    const getUsernames = () => {
+        getTopUsers();
+        getNewUsers();
+    }
+
+    const loadPage = () => {
+        getUsers();
+        getLogs();
+        getHours();
+        getLanguages();
+        getUsernames();
+        setButtons();
+    }
+
+    loadPage();
 </script>
