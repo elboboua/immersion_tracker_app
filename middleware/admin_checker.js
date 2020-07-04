@@ -1,8 +1,8 @@
 const isAdmin = (req, res, next) => {
-    if (req.user.id == 9 && req.user.username == 'ahmadibnrachid') {
+    if (req.user.id == 9 && req.user.username.toLowerCase() == 'ahmadibnrachid') {
         next();
     } else {
-        res.send(405)
+        res.sendStatus(405)
     }
 }
 
