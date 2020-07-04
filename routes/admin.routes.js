@@ -24,7 +24,6 @@ router.get('/count-hours', async (req, res) => {
 
 router.get('/count-languages', async (req, res) => {
     let result = await knex('log').select(knex.raw('count(distinct language_id) as count'));
-    console.log(result)
     res.send(result[0]);
 })
 

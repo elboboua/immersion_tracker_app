@@ -30,7 +30,6 @@ const getLogsDateByID = (id) => {
 }
 
 const insertLog = (rb, ru) => {
-    console.log(rb)
     let log = {
         name: rb.name,
         user_id: parseInt(ru.id),

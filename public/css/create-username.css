@@ -1,11 +1,16 @@
-#username-message {
+
+.message {
     border-radius: 15px;
-    display: none;
     width: auto;
     margin: auto;
     margin-bottom: 15px;
     padding:5px;
+    
 }
+        #username-message {
+            display: none;
+        }
+
 #loader {
     display: none;
     margin: auto;

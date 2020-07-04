@@ -61,11 +61,16 @@ router.post('/try-username/', async (req,res) => {
     }
 })
 
-router.get('/update-username/:username', async (req,res) => {    
-    let result = await knex('user').update({username: req.params.username}).where({id: req.user.id})
-    if (result != undefined) {
-        res.redirect('/')
-    }
+router.get('/update-username', async (req,res) => {
+    let check = /^[a-zA-Z0-9]+$/.test(req.query.username);
+    if (check) {
+        let result = await knex('user').update({username: req.query.username}).where({id: req.user.id})
+        if (result != undefined) {
+            res.redirect('/')
+        }
+    } else {
+        res.render('create-username', {message: 'There was an error submitting your username. Please try again.'})
+    } 
 })
 
 router.get('/get-dashboard-info', async (req, res) => {
