@@ -20,13 +20,11 @@ router.get('/sumByType', async (req,res) => {
 router.post('/getLastWeek', async (req, res) => {
     let result = await knex('log')
     .join('language', 'language.id', 'log.language_id')
-    .select(knex.raw("DATE_FORMAT(log.date, '%Y-%m-%d') as date, sum(log.time) as time, language.name as language"))
+    .select(knex.raw("DATE_FORMAT(log.date, '%Y-%m-%d') as date, sum(log.time) as time"))
     .andWhere('date', '<=', req.body.today)
     .andWhere('date', '>=', req.body.lastWeek)
     .andWhere('deleted', '=', '0')
     .groupBy('date')
-    .groupBy('language_id')
-    .orderBy('language_id')
     .orderBy('date', 'asc')
 
     res.send(result);
