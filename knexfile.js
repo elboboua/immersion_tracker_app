@@ -27,6 +27,7 @@ module.exports = {
       user: process.env.REMOTE_DB_USER,
       password: process.env.REMOTE_DB_PASSWORD,
       timezone : 'UTC',
+      charset : 'utf8mb4',
       dateStrings: true,
     },
   }
