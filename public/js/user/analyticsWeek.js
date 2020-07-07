@@ -3,25 +3,16 @@
 
 // request the json
 const getLastWeeksLog = async () => {
-    let todayDate = new Date();
-    let lastWeekDate = new Date();
-    lastWeekDate.setDate(todayDate.getDate() - 7)
-    let today = todayDate.getFullYear() + '-' + (todayDate.getMonth()+1) + '-' + todayDate.getDate();
-    let lastWeek = lastWeekDate.getFullYear() + '-' + (lastWeekDate.getMonth()+1) + '-' + lastWeekDate.getDate(); 
-    
     let datesThisWeek = [];
-    for (let i = 1; i <= 7; i++) {
-        let iter = new Date();
-        iter.setMonth(lastWeekDate.getMonth())
-        iter.setDate(lastWeekDate.getDate() + i)
-        datesThisWeek.push(iter.toJSON().slice(0,10));
+    for (let i = 0; i < 7; i++) {
+        datesThisWeek.unshift(moment().subtract(i, 'days').format().slice(0,10));
     }
     let lastWeekAndToday = {
-        today: today,
-        lastWeek: lastWeek
+        today: moment().format(),
+        lastWeek: moment().subtract(6, 'd').format()
     }
     lastWeekAndToday = JSON.stringify(lastWeekAndToday);
-    
+
     let result = await fetch(`/user/${user.username}/getLastWeek`, {
         method: 'post',
         headers: {
