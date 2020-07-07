@@ -37,7 +37,7 @@ const insertLog = (rb, ru) => {
         type_id: parseInt(rb.type_id),
         time: rb.time,
         date: rb.date,
-        date_created: new Date().toISOString().slice(0,10),
+        date_created: new Date().toISOString().slice(0, 19).replace('T', ' '),
     };
     return knex('log').insert(log);
 }
