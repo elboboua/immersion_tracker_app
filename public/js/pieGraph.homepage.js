@@ -5,7 +5,7 @@ const createPieChart = async () => {
     pie.style.height = '300px'
     pie.style.minHeight = '200px';
     pie.width = 'auto';
-    pie.height = 'auto'
+    pie.height = 'auto';
     pie.getContext('2d')
 
     let sumByType = await fetch('/homepage/sumByType');

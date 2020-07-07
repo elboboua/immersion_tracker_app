@@ -3,7 +3,7 @@ let weekButton = document.getElementById('week-button');
 let monthButton = document.getElementById('month-button');
 let yearButton = document.getElementById('year-button');
 
-let ratioDiv = document.getElementById('graph-container-ratio');
+let ratioDiv = document.getElementById('graph-container-ratios');
 let weekDiv = document.getElementById('graph-container-week');
 let monthDiv = document.getElementById('graph-container-month');
 let yearDiv = document.getElementById('graph-container-year');

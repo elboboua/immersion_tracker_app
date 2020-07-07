@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const logModels = require('../models/log.models');
+const knex = require('../config/KnexConnection');
+
 
 // get all logs for a user
 router.get('/getAllLogs', async (req, res) => {
@@ -53,6 +55,20 @@ router.post('/getLastYear', async (req, res) => {
 
 router.post('/getAllTime', async (req, res) => {
     let result = await logModels.getAllTime(req.body, req.user);
+    res.send(result);
+})
+
+router.get('/getRatios', async (req,res) => {
+    let result = await knex('log')
+    .join('type', 'type.id', 'log.type_id')
+    .join('language', 'language.id', 'log.language_id')
+    .select(knex.raw("type.name as type, language.name as language, sum(time) as time"))
+    .where('log.user_id', '=', req.user.id)
+    .andWhere('log.deleted', '=', 0)
+    .groupBy('type.id')
+    .groupBy('log.language_id')
+    .orderBy('language', 'asc')
+    .orderBy('time', 'desc')
     res.send(result);
 })
 
