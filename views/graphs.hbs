@@ -11,7 +11,10 @@
                    {{!-- Graphs --}}
             <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
                 <label class="btn btn-secondary active">
-                    <input type="radio" name="options" id="week-button" autocomplete="off" checked> Week
+                    <input type="radio" name="options" id="ratio-button" autocomplete="off" checked> Ratios
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="week-button" autocomplete="off"> Week
                 </label>
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="month-button" autocomplete="off"> Month
@@ -21,6 +24,7 @@
                 </label>
             </div>
 
+            <div id="graph-container-ratio" class="container"></div>
             <div id="graph-container-week" class="container"></div>
             <div id="graph-container-month" class="container"></div>
             <div id="graph-container-year" class="container"></div> 
@@ -35,7 +39,7 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="/ChartJS/Chart.js"></script>
-<script src="/js/graphButtons.js"></script>
+<script src="/js/graphButtons.stats.js"></script>
 <script src="/js/createGraph.js"></script>
 <script src="/js/analyticsWeek.js"></script>
 <script src="/js/analyticsMonth.js"></script>
