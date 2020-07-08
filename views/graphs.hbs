@@ -1,39 +1,27 @@
 <link rel="stylesheet" href="/css/homepage.css">
 
-{{> navbar }}
-
-<div class="container">
-
-    <div class="row"> 
-        {{> sidebar}}
-
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 text-center">
-                   {{!-- Graphs --}}
-            <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="options" id="ratio-button" autocomplete="off" checked> Ratios
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" id="week-button" autocomplete="off"> Week
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" id="month-button" autocomplete="off"> Month
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" id="year-button" autocomplete="off"> Year
-                </label>
-            </div>
-
-            <div id="graph-container-ratios" class="container"></div>
-            <div id="graph-container-week" class="container"></div>
-            <div id="graph-container-month" class="container"></div>
-            <div id="graph-container-year" class="container"></div> 
-            <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
-        </main>
-
+<div>
+            {{!-- Graphs --}}
+    <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="ratio-button" autocomplete="off" checked> Ratios
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="week-button" autocomplete="off"> Week
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="month-button" autocomplete="off"> Month
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="year-button" autocomplete="off"> Year
+        </label>
     </div>
-</div>
 
+    <div id="graph-container-ratios" class="container"></div>
+    <div id="graph-container-week" class="container"></div>
+    <div id="graph-container-month" class="container"></div>
+    <div id="graph-container-year" class="container"></div> 
+    <div class="_fa7cdd4c68507744" data-zone="33a0333f17384a5abdc089c0330591b2" style="width:468px;height:60px;display: inline-block;margin: 0 auto"></div></div>
 <script>
     document.getElementById('stats-link').className += ' active'
 </script>

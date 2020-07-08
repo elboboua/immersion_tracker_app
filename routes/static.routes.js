@@ -1,28 +1,24 @@
 const router = require('express').Router();
 
 router.get('/stats', (req, res) => {
-    res.render('graphs')
+    res.render('graphs', {
+        layout: 'logged-in'
+    })
 });
 router.get('/settings', (req, res) => {
-    res.render('settings')
-});
-router.get('/createLog', (req, res) => {
-    res.render('createLog')
+    res.render('settings', {
+        layout: 'logged-in'
+    })
 });
 router.get('/getLogs', (req,res) => {
-    res.render('getLogs')
-})
-router.get('/analytics', (req, res) => {
-    res.render('analytics')
-})
-router.get('/analyticsMonth', (req, res) => {
-    res.render('analyticsMonth')
-})
-router.get('/analyticsYear', (req, res) => {
-    res.render('analyticsYear')
+    res.render('getLogs', {
+        layout: 'logged-in'
+    })
 })
 router.get('/', (req, res) => {
-    res.render('homepage')
+    res.render('homepage', {
+        layout: 'logged-in'
+    })
 });
 
 

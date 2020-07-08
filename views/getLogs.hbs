@@ -1,19 +1,7 @@
 <link rel="stylesheet" href="/css/homepage.css">
 
-{{> navbar}}
-
-<div class="container-fluid">
-
-    <div class="row">
-
-        {{> sidebar}}
-
-        <main id="main-content" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            {{> getLogs}}
-        </main>
-    </div>
-
-</div>
+{{> getLogs}}
+        
 
 <script>
     document.getElementById('logs-link').className += ' active'

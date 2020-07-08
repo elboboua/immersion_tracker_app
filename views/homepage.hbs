@@ -1,48 +1,36 @@
 <link rel="stylesheet" href="/css/homepage.css">
 
-{{> navbar}}
+<div>
 
-<div class="container-fluid">
+    {{> dashboard this}}
 
     <div class="row">
-
-        {{> sidebar}}
-
-        <main id="main-content" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 text-center">
-
-            {{> dashboard this}}
-
-            <div class="row">
-                <div class="col-md container overflow-auto order-md-12 feed-data-col">
-                    {{!-- Graphs --}}
-                    <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="options" id="week-button" autocomplete="off" checked> Week
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="month-button" autocomplete="off"> Month
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="year-button" autocomplete="off"> Year
-                        </label>
-                    </div>
-
-                    <div id="graph-container-week"></div>
-                    <div id="graph-container-month"></div>
-                    <div id="graph-container-year"></div>
-                    <div class="_fa7cdd4c68507744 text-center" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
-
-                </div>
-                <div class="col-md container-fluid overflow-auto order-md-1 feed-data-col text-left">
-                    {{> getLogs}}
-                    <div class="text-center">
-                        <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>
-                    </div>
-                </div>
+        <div class="col-md container overflow-auto order-md-12 feed-data-col">
+            {{!-- Graphs --}}
+            <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="week-button" autocomplete="off" checked> Week
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="month-button" autocomplete="off"> Month
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="year-button" autocomplete="off"> Year
+                </label>
             </div>
-        </main>
-    </div>
 
+            <div id="graph-container-week"></div>
+            <div id="graph-container-month"></div>
+            <div id="graph-container-year"></div>
+            <div class="_fa7cdd4c68507744" data-zone="33a0333f17384a5abdc089c0330591b2" style="width:468px;height:60px;display: inline-block;margin: 0 auto"></div>
+        </div>
+        <div class="col-md container-fluid overflow-auto order-md-1 feed-data-col text-left">
+            {{> getLogs}}
+            <div class="text-center">
+                <div class="_fa7cdd4c68507744" data-zone="33a0333f17384a5abdc089c0330591b2" style="width:468px;height:60px;display: inline-block;margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

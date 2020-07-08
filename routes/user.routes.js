@@ -2,7 +2,13 @@ const router = require('express').Router();
 const knex = require('../config/KnexConnection');
 
 router.get('/:username', (req, res) => {
-    res.render('user');
+    if (req.user) {
+        res.render('user', {
+            layout: 'logged-in'
+        });  
+    } else {
+        res.render('user');
+    }
 })
 
 router.get('/:username/avatar', async (req, res) => {
