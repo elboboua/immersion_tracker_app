@@ -74,7 +74,7 @@ const getCommunityLogs = async () => {
 
         if (i% 10 == 0 && i > 0) {
             let ad = document.createElement('div');
-            ad.innerHTML = '<div class="_fa7cdd4c68507744" data-zone="33a0333f17384a5abdc089c0330591b2" style="width:468px;height:60px;display: inline-block;margin: 0 auto"></div>'
+            ad.innerHTML = '<div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>'
             ad.className = 'text-center'
             logContainer.appendChild(ad)
         }
