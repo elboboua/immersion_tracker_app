@@ -1,6 +1,10 @@
+.log-container {
+    margin: auto;
+}
+
 .log-card {
-    max-width: 900px;
-    margin: 10px 0px;
+    max-width: 500px;
+    margin: 10px auto;
 }
 
 .log-card-header {
@@ -27,4 +31,17 @@
 
 .card-line {
     margin-bottom: 10px;
+}
+
+.user-link {
+    color: white;
+}
+
+.activity {
+    text-align: center;
+    font-weight: bold;
+}
+
+#title {
+    margin: 20px auto;
 }

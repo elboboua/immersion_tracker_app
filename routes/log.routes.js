@@ -14,6 +14,18 @@ router.get('/getAllLogsWithLanguages', async (req, res) => {
     res.send(result);
 })
 
+router.get('/get-community-logs', async (req, res) => {
+    let result = await knex('log')
+    .join('user', 'user.id', 'log.user_id')
+    .join('language', 'language.id', 'log.language_id')
+    .join('type', 'type.id', 'log.type_id')
+    .select(knex.raw('username, avatar_name, user_id, log.name as activity, log.time, log.date, language.name as language, type.name as type'))
+    .where('private', '=', 0)
+    .orderBy('date_created', 'desc')
+    .limit(100)
+    res.send(result);
+})
+
 router.get('/getLogsDate', async (req, res) => {
     let result = await logModels.getLogsDateByID(req.user.id);
     res.send(result);

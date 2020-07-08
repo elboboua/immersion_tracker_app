@@ -20,6 +20,11 @@ router.get('/', (req, res) => {
         layout: 'logged-in'
     })
 });
+router.get('/community', (req, res) => {
+    res.render('community', {
+        layout: 'logged-in'
+    })
+});
 
 
 module.exports = router;
