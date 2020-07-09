@@ -20,6 +20,34 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/get-users', async (req, res) => {
+    let following_id = await knex('follower')
+    .select('followed_id')
+    .where('follower_id', '=', req.user.id)
+    following_id = following_id.map(element => element.followed_id)
+
+    let follower_id = await knex('follower')
+    .select('follower_id')
+    .where('followed_id', '=', req.user.id)
+    follower_id = follower_id.map(element => element.follower_id)
+
+    let following = await knex('user')
+    .select('username')
+    .select('avatar_name')
+    .whereIn('id', following_id)
+
+    let followers = await knex('user')
+    .select('username')
+    .select('avatar_name')
+    .whereIn('id', follower_id)
+
+
+    res.send({
+        following,
+        followers
+    })
+})
+
 router.get('/:username', async (req, res) => {
         let result = await knex('user').select('id').where({username: req.params.username});
         let id = result[0].id

@@ -1,0 +1,114 @@
+<style>
+    a {
+        color: 'black'
+    }
+
+    .username {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
+
+<div id='follower-following-container'>
+
+    <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="following-button" autocomplete="off" checked> Following
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="followers-button" autocomplete="off"> Followers
+        </label>
+    </div>
+
+
+    <div id='following' class="users"></div>
+    <div id='followers' class="users"></div>
+</div>
+
+<script>
+
+let followingButton = document.getElementById('following-button');
+let followersButton = document.getElementById('followers-button');
+
+let followingDiv = document.getElementById('following');
+let followersDiv = document.getElementById('followers');
+
+followersDiv.style.display = 'none';
+
+followersButton.onclick = () => {
+    followingDiv.style.display = 'none';
+    followersDiv.style.display = 'block';
+}
+
+followingButton.onclick = () => {
+    followersDiv.style.display = 'none';
+    followingDiv.style.display = 'block';
+}
+
+populateFollowingFollowers = async (url) => {
+
+    let result = await fetch(url);
+    result = await result.json();
+    console.log(result)
+    for (let i = 0; i < result.following.length; i++) {
+        let container = document.getElementById('following')
+        let card = document.createElement('div');
+        card.style.padding = '10px'
+        card.className = 'card shadow';
+        let avatar = document.createElement('img');
+        avatar.src = `/imgs/avatars/${result.following[i].avatar_name}`
+        avatar.style.width = '50px'
+        avatar.style.height = '50px'
+        avatar.style.borderRadius = '50%';
+        let username_link = document.createElement('a')
+        let username = document.createElement('span');
+        username.className = 'username';
+        username.innerText = '@' + result.following[i].username;
+        username_link.href = `/user/${result.following[i].username}`;
+        username_link.className = 'text-right'
+
+        username_link.appendChild(username)
+        card.appendChild(avatar);
+        card.appendChild(username_link);
+        container.appendChild(card)
+
+    } 
+
+    for (let i = 0; i < result.followers.length; i++) {
+        let container = document.getElementById('followers')
+        let card = document.createElement('div');
+        card.style.padding = '10px'
+        card.className = 'card shadow';
+        let avatar = document.createElement('img');
+        avatar.src = `/imgs/avatars/${result.followers[i].avatar_name}`
+        avatar.style.width = '50px'
+        avatar.style.height = '50px'
+        avatar.style.borderRadius = '50%';
+        let username_link = document.createElement('a')
+        let username = document.createElement('span');
+        username.className = 'username';
+        username.innerText = '@' + result.followers[i].username;
+        username_link.href = `/user/${result.followers[i].username}`;
+        username_link.className = 'text-right username'
+
+        username_link.appendChild(username)
+        card.appendChild(avatar);
+        card.appendChild(username_link);
+        container.appendChild(card)
+
+    } 
+}
+
+if (location.href.split('/')[3] != 'followers-following') {
+    // user's page
+    let message = document.createElement('h1')
+    message.innerText = 'This page is in progress! Come back soon!'
+    message.style.textAlign = 'center';
+    message.style.margin = '5px';
+
+    document.getElementsByTagName('body')[0].appendChild(message);
+} else {
+    // your page
+    populateFollowingFollowers('/followers/get-users');
+}
+</script>

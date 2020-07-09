@@ -25,6 +25,13 @@ let loadFollowers = async () => {
 loadFollowButton = async () => {
     let followButton = document.getElementById('follow-button');
     let following = await fetch(`/followers/follows/${user.username}`)
+    if (following.status === 405) {
+        followButton.innerText = 'Follow';
+        followButton.onclick = () => {
+            location.href = '/';
+        }
+        return;
+    }
     following = await following.json();
     following = following[0].count;
     let follows = false;

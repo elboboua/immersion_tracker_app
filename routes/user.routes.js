@@ -11,6 +11,16 @@ router.get('/:username', (req, res) => {
     }
 })
 
+router.get('/:username/followers-following', (req, res) => {
+    if (req.user) {
+        res.render('followers-following', {
+            layout: 'logged-in'
+        });  
+    } else {
+        res.render('followers-following');
+    }
+})
+
 router.get('/:username/avatar', async (req, res) => {
     let result = await knex('user').select('avatar_name').where({username: req.params.username});
     res.json({avatar_name: result[0].avatar_name})

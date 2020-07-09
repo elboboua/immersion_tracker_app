@@ -5,17 +5,33 @@
     <div id="dashboard-header" class="card-header">
         <div class="row">
             <div class="col-md-4">
-                <a href="/account/upload-avatar">
-                    <div class="avatar-container header-components text-left" >
-                        <img id="avatar">
-                    </div>
-                </a>
+                    {{#if public}}
+                        <div class="avatar-container header-components text-left" >
+                            <img id="avatar">
+                        </div>
+                    {{else}}
+                        <a href="/account/upload-avatar">
+                            <div class="avatar-container header-components text-left" >
+                                <img id="avatar">
+                            </div>
+                        </a>
+                    {{/if}}
                 <div id='username' class="header-components text-left">Loading ...</div>
             </div>
             <div class="col-md-8 header-components">
-                <div class="text-right header-components" id="follower-info">
-                        <span id='following'>...</span> following | <span id='followers'>...</span> followers
-                </div>
+                {{#if public}}
+                <a id='followers-link'>
+                    <div class="text-right header-components" id="follower-info">
+                            <span id='following'>...</span> following | <span id='followers'>...</span> followers
+                    </div>
+                </a>
+                {{else}}
+                <a href="/followers-following">
+                    <div class="text-right header-components" id="follower-info">
+                            <span id='following'>...</span> following | <span id='followers'>...</span> followers
+                    </div>
+                </a>
+                {{/if}}
                 <div class="header-components">
                     {{#if public}}
                         <button id='follow-button' class="btn btn-light">loading ...</button>

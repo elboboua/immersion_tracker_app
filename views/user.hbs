@@ -33,6 +33,7 @@
     let user = {
         username: window.location.href.split('/')[4]
     }; 
+    document.getElementById('followers-link').href = `/user/${user.username}/followers-following`
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="/js/user/loadDashboard.js"></script>

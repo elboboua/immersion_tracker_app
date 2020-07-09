@@ -26,5 +26,11 @@ router.get('/community', (req, res) => {
     })
 });
 
+router.get('/followers-following', (req, res) => {
+    res.render('followers-following', {
+        layout: 'logged-in'
+    })
+});
+
 
 module.exports = router;
