@@ -4,7 +4,7 @@
 <div id="dashboard" class="card shadow">
     <div id="dashboard-header" class="card-header">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <a href="/account/upload-avatar">
                     <div class="avatar-container header-components text-left" >
                         <img id="avatar">
@@ -12,9 +12,14 @@
                 </a>
                 <div id='username' class="header-components text-left">Loading ...</div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8 header-components">
                 <div class="text-right header-components" id="follower-info">
-                    <span id='following'>...</span> following | <span id='followers'>...</span> followers
+                        <span id='following'>...</span> following | <span id='followers'>...</span> followers
+                </div>
+                <div class="header-components">
+                    {{#if public}}
+                        <button id='follow-button' class="btn btn-light">loading ...</button>
+                    {{/if}}
                 </div>
             </div>
         </div>

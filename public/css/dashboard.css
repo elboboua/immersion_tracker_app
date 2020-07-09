@@ -27,17 +27,14 @@
 
 .header-components {
     display: inline-block;
+    vertical-align: middle;
 }
 
-#username {
-    position: relative;
-    bottom: 15px;
-}
 
 #follower-info {
     position: relative;
-    top: 15px;
-    margin-bottom: 20px;
+    top: 5px;
+    margin-top: 5px;
 }
 
 .stat-number {
@@ -61,4 +58,13 @@
 
 #plus-button {
     margin-top: 12px 0px 30px;
+}
+
+#follow-button {
+    margin-left: 15px;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    border: none;
+
 }
