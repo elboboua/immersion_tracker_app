@@ -2,13 +2,22 @@
 <link rel="stylesheet" href="/css/homepage.css">
 
 <div id="dashboard" class="card shadow">
-    <div id="dashboard-header" class="card-header text-center">
-        <a href="/account/upload-avatar">
-            <div class="avatar-container" >
-                <img id="avatar">
+    <div id="dashboard-header" class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/account/upload-avatar">
+                    <div class="avatar-container header-components text-left" >
+                        <img id="avatar">
+                    </div>
+                </a>
+                <div id='username' class="header-components text-left">Loading ...</div>
             </div>
-        </a>
-        <div id='username'>Loading ...</div>
+            <div class="col-md-6">
+                <div class="text-right header-components" id="follower-info">
+                    <span id='following'>...</span> following | <span id='followers'>...</span> followers
+                </div>
+            </div>
+        </div>
     </div>
     <div id="dashboard-body">
         <span>

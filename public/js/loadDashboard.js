@@ -11,7 +11,11 @@ let loadDashboard = async () => {
     let avatar = document.getElementById('avatar');
     avatar.src = `/imgs/avatars/${imageName.avatar_name || 'default.png'}`;
 
-
+    let followerInfo = await fetch('/followers');
+    followerInfo = await followerInfo.json();
+    console.log(followerInfo)
+    document.getElementById('following').innerText = followerInfo.following;
+    document.getElementById('followers').innerText = followerInfo.followers;
 
 }
 
