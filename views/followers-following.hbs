@@ -60,12 +60,12 @@ let createFollowerCards = (users, div) => {
         let avatarContainer = document.createElement('div');
         avatarContainer.className = 'avatar-container header-components text-left'
         let avatar = document.createElement('img');
-        avatar.src = `/imgs/avatars/${users[i].avatar_name}`
+        avatar.src = `/imgs/avatars/${users[i].avatar_name  || 'default.png'}`
         avatar.className = 'avatar'
 
         let username_link = document.createElement('a')
         username_link.className = 'text-right user-link header-components'
-        username_link.href = `/user/${users[i].username || 'default.png'}`;
+        username_link.href = `/user/${users[i].username}`;
         let username = document.createElement('div');
         username.innerText = '@' + users[i].username;
 
@@ -86,7 +86,6 @@ let populateFollowingFollowers = async (url) => {
     result = await result.json();
     createFollowerCards(result.following, 'following')
     createFollowerCards(result.followers, 'followers')
-
 }
 
 if (location.href.split('/')[3] != 'followers-following') {
