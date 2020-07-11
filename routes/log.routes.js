@@ -21,6 +21,7 @@ router.get('/get-community-logs', async (req, res) => {
     .join('type', 'type.id', 'log.type_id')
     .select(knex.raw('username, avatar_name, user_id, log.name as activity, log.time, log.date, language.name as language, type.name as type'))
     .where('private', '=', 0)
+    .andWhere('deleted', '=', 0)
     .orderBy('date_created', 'desc')
     .limit(100)
     res.send(result);
