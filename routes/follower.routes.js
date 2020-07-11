@@ -35,11 +35,13 @@ router.get('/get-users', async (req, res) => {
     .select('username')
     .select('avatar_name')
     .whereIn('id', following_id)
+    .orderBy('id', 'desc')
 
     let followers = await knex('user')
     .select('username')
     .select('avatar_name')
     .whereIn('id', follower_id)
+    .orderBy('id', 'desc')
 
 
     res.send({
