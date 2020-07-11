@@ -18,7 +18,7 @@ const getCommunityLogs = async () => {
         avatarContainer.className = 'avatar-container header-components'
         let avatar = document.createElement('img');
         let avatar_src = result[i].avatar_name || 'default.png'
-        avatar.src = avatar_src;
+        avatar.src = `/imgs/avatars/${avatar_src}`;
         avatar.className = 'avatar';
         let user_link = document.createElement('a');
         user_link.href = `/user/${result[i].username}`
