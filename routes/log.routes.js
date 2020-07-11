@@ -34,7 +34,7 @@ router.get('/getLogsDate', async (req, res) => {
 // create a new log
 router.post('/create', async (req, res) => {
     await logModels.insertLog(req.body, req.user);
-    res.redirect('/')
+    res.redirect(req.header('Referer') || '/')
 })
 
 router.post('/delete', async (req, res) => {

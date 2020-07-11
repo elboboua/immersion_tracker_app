@@ -8,7 +8,7 @@ const getLogs = async () => {
     
     for (let i = 0; i < result.length; i++) {
         let card = document.createElement('div');
-        card.id = 'card_' + result[0].id
+        card.id = 'card_' + result[i].id
         card.className += " card log-card shadow";
 
         let header = document.createElement('div');
