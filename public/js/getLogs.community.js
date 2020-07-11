@@ -13,18 +13,21 @@ const getCommunityLogs = async () => {
         let header = document.createElement('div');
         header.className = 'card-header log-card-header';
 
-        let username = document.createElement('div');
         let avatarContainer = document.createElement('div');
         avatarContainer.className = 'avatar-container header-components'
         let avatar = document.createElement('img');
         let avatar_src = result[i].avatar_name || 'default.png'
         avatar.src = `/imgs/avatars/${avatar_src}`;
         avatar.className = 'avatar';
+        
+        
         let user_link = document.createElement('a');
         user_link.href = `/user/${result[i].username}`
         user_link.className = 'user-link header-components'
+        let username = document.createElement('div');
         username.className = 'header-row'
         username.innerText = '@' + result[i].username;
+
         avatarContainer.appendChild(avatar);
         header.appendChild(avatarContainer);
         user_link.appendChild(username)

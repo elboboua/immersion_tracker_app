@@ -1,11 +1,11 @@
-<style>
-    a {
-        color: 'black'
-    }
+<link rel="stylesheet" href="/css/getLog.css">
+<link rel="stylesheet" href="/css/dashboard.css">
 
-    .username {
-        display: inline-block;
-        vertical-align: middle;
+<style>
+    .user-link {
+        color: black;
+        float: right;
+        margin-top: 10px;
     }
 </style>
 
@@ -45,58 +45,48 @@ followingButton.onclick = () => {
     followingDiv.style.display = 'block';
 }
 
-populateFollowingFollowers = async (url) => {
+
+
+let createFollowerCards = (users, div) => {
+        for (let i = 0; i < users.length; i++) {
+        let container = document.getElementById(div)
+        let card = document.createElement('div');
+        card.style.padding = '10px'
+        card.className = 'card log-card shadow';
+
+        let row = document.createElement('div')
+        row.className = 'text-left'
+
+        let avatarContainer = document.createElement('div');
+        avatarContainer.className = 'avatar-container header-components text-left'
+        let avatar = document.createElement('img');
+        avatar.src = `/imgs/avatars/${users[i].avatar_name}`
+        avatar.className = 'avatar'
+
+        let username_link = document.createElement('a')
+        username_link.className = 'text-right user-link header-components'
+        username_link.href = `/user/${users[i].username || 'default.png'}`;
+        let username = document.createElement('div');
+        username.innerText = '@' + users[i].username;
+
+        avatarContainer.appendChild(avatar)
+        row.appendChild(avatarContainer);
+        username_link.appendChild(username)
+        row.appendChild(username_link);
+        card.appendChild(row)
+        container.appendChild(card)
+
+    } 
+}
+
+
+let populateFollowingFollowers = async (url) => {
 
     let result = await fetch(url);
     result = await result.json();
-    console.log(result)
-    for (let i = 0; i < result.following.length; i++) {
-        let container = document.getElementById('following')
-        let card = document.createElement('div');
-        card.style.padding = '10px'
-        card.className = 'card shadow';
-        let avatar = document.createElement('img');
-        avatar.src = `/imgs/avatars/${result.following[i].avatar_name}`
-        avatar.style.width = '50px'
-        avatar.style.height = '50px'
-        avatar.style.borderRadius = '50%';
-        let username_link = document.createElement('a')
-        let username = document.createElement('span');
-        username.className = 'username';
-        username.innerText = '@' + result.following[i].username;
-        username_link.href = `/user/${result.following[i].username}`;
-        username_link.className = 'text-right'
+    createFollowerCards(result.following, 'following')
+    createFollowerCards(result.followers, 'followers')
 
-        username_link.appendChild(username)
-        card.appendChild(avatar);
-        card.appendChild(username_link);
-        container.appendChild(card)
-
-    } 
-
-    for (let i = 0; i < result.followers.length; i++) {
-        let container = document.getElementById('followers')
-        let card = document.createElement('div');
-        card.style.padding = '10px'
-        card.className = 'card shadow';
-        let avatar = document.createElement('img');
-        avatar.src = `/imgs/avatars/${result.followers[i].avatar_name}`
-        avatar.style.width = '50px'
-        avatar.style.height = '50px'
-        avatar.style.borderRadius = '50%';
-        let username_link = document.createElement('a')
-        let username = document.createElement('span');
-        username.className = 'username';
-        username.innerText = '@' + result.followers[i].username;
-        username_link.href = `/user/${result.followers[i].username}`;
-        username_link.className = 'text-right username'
-
-        username_link.appendChild(username)
-        card.appendChild(avatar);
-        card.appendChild(username_link);
-        container.appendChild(card)
-
-    } 
 }
 
 if (location.href.split('/')[3] != 'followers-following') {
