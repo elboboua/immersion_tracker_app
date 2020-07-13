@@ -70,3 +70,8 @@
     100% { transform: rotate(360deg); }
 }
 
+@media screen and (max-width:640px) {
+    #log-container {
+        height: 100%;
+    }
+}

@@ -116,12 +116,16 @@ const loadMoreLogs = async () => {
 
 
 const addInfiniteScroll =  () => {
-    let community_feed = document.getElementById('log-container');
+    let community_feed; 
+
+    if (screen.width > 640) {
+        community_feed = document.getElementById('log-container');
+    } else {
+        community_feed = document.getElementsByTagName('body')[0];
+    }
     community_feed.onscroll = async () => {
         if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
-            loader.style.display = 'block';
             await loadMoreLogs();
-            loader.style.display = 'none';
         }
     }
 } 
