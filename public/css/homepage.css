@@ -45,28 +45,28 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 @media (max-width: 767.98px) {
-.sidebar {
-    top: 0.5rem;
-    height: fit-content;
-    border-bottom: 1px solid #666;
-    border-top: 1px solid #666;
-    
-}
+    .sidebar {
+        top: 0.5rem;
+        height: fit-content;
+        border-bottom: 1px solid #666;
+        border-top: 1px solid #666;
+        
+    }
 
-.sidebar-sticky {
-    height: fit-content;
-}
+    .sidebar-sticky {
+        height: fit-content;
+    }
 
-.feed-data-col {
-    height:fit-content;
-}
+    .feed-data-col {
+        height:fit-content;
+    }
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
-.sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-}
+    .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
 }
 
 .sidebar .nav-link {
@@ -133,4 +133,6 @@ box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 #logout-link {
     margin-top: 20px;
 }
+
+
 
