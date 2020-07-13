@@ -139,7 +139,7 @@ const addInfiniteScroll =  () => {
 // create a single object from multiple objects
 const getCommunityLogs = async () => {
 
-    let result = await fetch('log/get-community-logs');
+    let result = await fetch('/log/get-community-logs');
     result = await result.json();
     createAndAppendCards(result, 'discover-log-container', 'discover-card');
     
@@ -147,7 +147,7 @@ const getCommunityLogs = async () => {
 }
 
 const getFollowingLogs = async () => {
-    let result = await fetch('log/get-following-logs');
+    let result = await fetch('/log/get-following-logs');
     result = await result.json();
     createAndAppendCards(result, 'following-log-container', 'following-card')
 }

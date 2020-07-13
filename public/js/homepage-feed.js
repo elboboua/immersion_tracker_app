@@ -132,7 +132,7 @@ const addInfiniteScroll =  () => {
 
 
 const getFollowingLogs = async () => {
-    let result = await fetch('log/get-following-logs');
+    let result = await fetch('/log/get-following-logs');
     result = await result.json();
     createAndAppendCards(result, 'following-log-container', 'following-card')
 }
