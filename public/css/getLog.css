@@ -1,3 +1,7 @@
+body {
+    overflow: auto;
+}
+
 #button-group {
     width: fit-content;
     margin: 20px auto;

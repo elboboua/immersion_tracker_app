@@ -126,7 +126,11 @@ const addInfiniteScroll =  () => {
             }
         }
     } else {
-        community_feed = document.getElementsByTagName('body')[0];
+        document.body.onscroll = async () => {
+            if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+                await loadMoreLogs();
+            }        
+        }
     }
 } 
 

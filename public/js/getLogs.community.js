@@ -125,15 +125,26 @@ const loadMoreLogs = async () => {
 
 
 const addInfiniteScroll =  () => {
-    let community_feed = document.getElementById('log-container');
-    community_feed.onscroll = async () => {
-        if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
-            let logContainer = document.getElementById('log-container')
-            loader.style.display = 'block';
-            await loadMoreLogs();
-            loader.style.display = 'none';
+
+    loader.style.display = 'block';
+
+    if (screen.width > 640) {
+        community_feed = document.getElementById('log-container');
+        community_feed.onscroll = async () => {
+            if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
+                await loadMoreLogs();
+            }
+        }
+    } else {
+        document.body.onscroll = async () => {
+            if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+                await loadMoreLogs();
+            }        
         }
     }
+
+    loader.style.display = 'none';
+
 } 
 
 // create a single object from multiple objects
