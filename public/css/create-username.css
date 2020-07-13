@@ -7,9 +7,9 @@
     padding:5px;
     
 }
-        #username-message {
-            display: none;
-        }
+#username-message {
+    display: none;
+}
 
 #loader {
     display: none;

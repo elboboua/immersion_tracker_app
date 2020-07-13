@@ -19,12 +19,26 @@ router.get('/get-community-logs', async (req, res) => {
     .join('user', 'user.id', 'log.user_id')
     .join('language', 'language.id', 'log.language_id')
     .join('type', 'type.id', 'log.type_id')
-    .select(knex.raw('username, avatar_name, user_id, log.name as activity, log.time, log.date, language.name as language, type.name as type'))
+    .select(knex.raw('username, avatar_name, user_id, log.name as activity, log.time, log.date, log.id as id, language.name as language, type.name as type'))
     .where('private', '=', 0)
     .andWhere('deleted', '=', 0)
     .orderBy('date_created', 'desc')
-    .limit(100)
+    .limit(25)
     res.send(result);
+})
+
+router.get('/get-more-community-logs/:log_id', async (req, res) => {
+    let result = await knex('log')
+    .join('user', 'user.id', 'log.user_id')
+    .join('language', 'language.id', 'log.language_id')
+    .join('type', 'type.id', 'log.type_id')
+    .select(knex.raw('username, avatar_name, user_id, log.name as activity, log.time, log.date, log.id as id, language.name as language, type.name as type'))
+    .where('private', '=', 0)
+    .andWhere('deleted', '=', 0)
+    .andWhere('log.id', '<', req.params.log_id)
+    .orderBy('date_created', 'desc')
+    .limit(25)
+    res.send(result);   
 })
 
 router.get('/getLogsDate', async (req, res) => {

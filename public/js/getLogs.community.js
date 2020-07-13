@@ -1,14 +1,12 @@
-// create a single object from multiple objects
-const getCommunityLogs = async () => {
+let loader = document.getElementById('loader');
 
-    let result = await fetch('log/get-community-logs');
-    result = await result.json();
-
+const createAndAppendCards = (result) => {
     let logContainer = document.getElementById('log-container')
     
     for (let i = 0; i < result.length; i++) {
         let card = document.createElement('div');
         card.className += " card log-card shadow";
+        card.id = result[i].id
 
         let header = document.createElement('div');
         header.className = 'card-header log-card-header';
@@ -82,6 +80,40 @@ const getCommunityLogs = async () => {
             logContainer.appendChild(ad)
         }
     }
+}
+
+
+const loadMoreLogs = async () => {
+    let logCards = document.getElementsByClassName('log-card')
+    let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
+    result = await result.json();
+    createAndAppendCards(result);
+    loader.style.display = 'none';
+}
+
+
+const addInfiniteScroll = () => {
+    let body = document.getElementsByTagName('body')[0];
+    let community_feed = document.getElementById('log-container');
+    community_feed.onscroll = () => {
+        if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
+            loader.style.display = 'block';
+            loadMoreLogs();
+        }
+    }
+} 
+
+// create a single object from multiple objects
+const getCommunityLogs = async () => {
+
+    let result = await fetch('log/get-community-logs');
+    result = await result.json();
+
+    createAndAppendCards(result);
+
+    addInfiniteScroll();
     
 }
 getCommunityLogs();
+
+
