@@ -84,11 +84,14 @@ const createAndAppendCards = (result) => {
 
 
 const loadMoreLogs = async () => {
+    let logContainer = document.getElementById('log-container')
+    logContainer.style.overflow = 'hidden'
     let logCards = document.getElementsByClassName('log-card')
     let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
     result = await result.json();
     createAndAppendCards(result);
     loader.style.display = 'none';
+    logContainer.style.overflow = 'auto'
 }
 
 
