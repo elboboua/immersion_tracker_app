@@ -96,7 +96,7 @@ const loadMoreLogs = async () => {
 const addInfiniteScroll =  () => {
     let community_feed = document.getElementById('log-container');
     community_feed.onscroll = async () => {
-        if (community_feed.scrollTop + community_feed.clientHeight == community_feed.scrollHeight) {
+        if (community_feed.scrollTop + community_feed.clientHeight > community_feed.scrollHeight) {
             let logContainer = document.getElementById('log-container')
             logContainer.style.overflow = 'hidden'
             loader.style.display = 'block';
