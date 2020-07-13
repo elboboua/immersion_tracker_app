@@ -1,3 +1,8 @@
+#button-group {
+    width: fit-content;
+    margin: 20px auto;
+}
+
 #log-container {
     margin: auto;
     overflow: auto;

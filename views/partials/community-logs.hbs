@@ -5,6 +5,18 @@
     {{> dashboard}}
     </div>
     <hr>
+    <div class="row w-100">
+        <div id='button-group' class="btn-group btn-group-toggle text-center" data-toggle="buttons" style="margin-top: 20px">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="discover-button" autocomplete="off" checked> Discover
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="following-button" autocomplete="off"> Following
+            </label>
+        </div>
+    </div>
+    <div class="text-left" id="discover-log-container"></div>
+    <div class="text-left" id="following-log-container"></div>
 </div>
 <div id="loader"></div>
 

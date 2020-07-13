@@ -1,12 +1,30 @@
 let loader = document.getElementById('loader');
 let alreadyLoading = false;
 
-const createAndAppendCards = (result) => {
-    let logContainer = document.getElementById('log-container')
+let discoverLogContainer = document.getElementById('discover-log-container');
+let followingLogContainer = document.getElementById('following-log-container');
+let discoverButton = document.getElementById('discover-button');
+let followingButton = document.getElementById('following-button');
+
+discoverLogContainer.style.display = 'block';
+followingLogContainer.style.display = 'none';
+
+discoverButton.onclick = () => {
+    followingLogContainer.style.display = 'none';
+    discoverLogContainer.style.display = 'block';
+}
+followingButton.onclick = () => {
+    discoverLogContainer.style.display = 'none';
+    followingLogContainer.style.display = 'block';
+}
+
+
+const createAndAppendCards = (result, container, cardClass) => {
+    let logContainer = document.getElementById(container)
     
     for (let i = 0; i < result.length; i++) {
         let card = document.createElement('div');
-        card.className += " card log-card shadow";
+        card.className += " card log-card shadow " + cardClass;
         card.id = result[i].id
 
         let header = document.createElement('div');
@@ -87,12 +105,21 @@ const createAndAppendCards = (result) => {
 const loadMoreLogs = async () => {
     
     if (!alreadyLoading) {
-        alreadyLoading = true;
-        let logCards = document.getElementsByClassName('log-card')
-        let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
-        result = await result.json();
-        createAndAppendCards(result);
-        alreadyLoading = false;
+        if (discoverLogContainer.style.display == 'block') {
+            alreadyLoading = true;
+            let discoverCards = document.getElementsByClassName('discover-card')
+            let result = await fetch(`/log/get-more-community-logs/${discoverCards[discoverCards.length-1].id}`)
+            result = await result.json();
+            createAndAppendCards(result, 'discover-log-container', 'discover-card');
+            alreadyLoading = false;
+        } else {
+            alreadyLoading = true;
+            let followingCards = document.getElementsByClassName('following-card')
+            let result = await fetch(`/log/get-more-following-logs/${followingCards[followingCards.length-1].id}`)
+            result = await result.json();
+            createAndAppendCards(result, 'following-log-container', 'following-card');
+            alreadyLoading = false; 
+        }
     }
 }
 
@@ -116,12 +143,18 @@ const getCommunityLogs = async () => {
 
     let result = await fetch('log/get-community-logs');
     result = await result.json();
-
-    createAndAppendCards(result);
-
+    createAndAppendCards(result, 'discover-log-container', 'discover-card');
     addInfiniteScroll();
     
 }
+
+const getFollowingLogs = async () => {
+    let result = await fetch('log/get-following-logs');
+    result = await result.json();
+    createAndAppendCards(result, 'following-log-container', 'following-card')
+}
+
 getCommunityLogs();
+getFollowingLogs();
 
 
