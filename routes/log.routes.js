@@ -33,6 +33,8 @@ router.get('/get-following-logs', async (req, res) => {
     .select('followed_id')
     .where('follower_id', '=', req.user.id)
     following = following.map( element => element.followed_id)
+    following.push(req.user.id)
+
 
     let result = await knex('log')
     .join('user', 'user.id', 'log.user_id')
@@ -67,6 +69,7 @@ router.get('/get-more-following-logs/:log_id', async (req, res) => {
     .select('followed_id')
     .where('follower_id', '=', req.user.id)
     following = following.map( element => element.followed_id)
+    following.push(req.user.id)
     
     let result = await knex('log')
     .join('user', 'user.id', 'log.user_id')

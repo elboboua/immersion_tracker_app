@@ -4,7 +4,7 @@ const getLogs = async () => {
     let result = await fetch('log/getAllLogsWithLanguages');
     result = await result.json();
 
-    let logContainer = document.getElementById('log-container')
+    let logContainer = document.getElementById('self-log-container')
     
     for (let i = 0; i < result.length; i++) {
         let card = document.createElement('div');

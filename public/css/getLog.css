@@ -4,7 +4,7 @@
 }
 
 #log-container {
-    margin: auto;
+    margin: 20px auto;
     overflow: auto;
     height: calc(var(--vh, 1vh) * 100);
 }
@@ -17,6 +17,7 @@
     color: #FFF;
     background-color: #443266;
     font-weight: 400;
+    text-align: left;
 }
 
 .header-row {
@@ -37,6 +38,7 @@
 
 .card-line {
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .user-link {
@@ -67,3 +69,4 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+

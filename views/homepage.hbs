@@ -22,11 +22,21 @@
             <div id="graph-container-week"></div>
             <div id="graph-container-month"></div>
             <div id="graph-container-year"></div>
-            <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>        </div>
-        <div class="col-md container-fluid overflow-auto order-md-1 feed-data-col text-left">
-            {{> getLogs}}
-            <div class="text-center">
-                <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>            
+            <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>       
+        </div>
+        <div id='log-container' class="col-md container-fluid overflow-auto order-md-1 feed-data-col feed">
+            <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="following-button" autocomplete="off" checked> Following
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="self-log-button" autocomplete="off"> Logs
+                </label>
+            </div>
+            <div id="following-log-container" class="text-left">   
+            </div>    
+            <div id="self-log-container" class="text-left">
+                {{> getLogs}}
             </div>
         </div>
     </div>
@@ -37,6 +47,7 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="/js/loadDashboard.js"></script>
+<script src="/js/homepage-feed.js"></script>
 <script src="/js/getLogs.js"></script>
 <script src="/ChartJS/Chart.js"></script>
 <script src="/js/graphButtons.js"></script>
