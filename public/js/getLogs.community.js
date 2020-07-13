@@ -84,24 +84,24 @@ const createAndAppendCards = (result) => {
 
 
 const loadMoreLogs = async () => {
-    let logContainer = document.getElementById('log-container')
-    logContainer.style.overflow = 'hidden'
+    
     let logCards = document.getElementsByClassName('log-card')
     let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
     result = await result.json();
     createAndAppendCards(result);
     loader.style.display = 'none';
-    logContainer.style.overflow = 'auto'
 }
 
 
-const addInfiniteScroll = () => {
-    let body = document.getElementsByTagName('body')[0];
+const addInfiniteScroll =  () => {
     let community_feed = document.getElementById('log-container');
-    community_feed.onscroll = () => {
+    community_feed.onscroll = async () => {
         if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
+            let logContainer = document.getElementById('log-container')
+            logContainer.style.overflow = 'hidden'
             loader.style.display = 'block';
-            loadMoreLogs();
+            await loadMoreLogs();
+            logContainer.style.overflow = 'auto'
         }
     }
 } 
