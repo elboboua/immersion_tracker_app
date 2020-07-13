@@ -88,12 +88,10 @@ const loadMoreLogs = async () => {
     
     if (!alreadyLoading) {
         alreadyLoading = true;
-        loader.style.display = 'block';
         let logCards = document.getElementsByClassName('log-card')
         let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
         result = await result.json();
         createAndAppendCards(result);
-        loader.style.display = 'none';
         alreadyLoading = false;
     }
 }
@@ -104,8 +102,10 @@ const addInfiniteScroll =  () => {
     community_feed.onscroll = async () => {
         if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
             let logContainer = document.getElementById('log-container')
+            loader.style.display = 'block';
             logContainer.style.overflow = 'hidden'
             await loadMoreLogs();
+            loader.style.display = 'none';
             logContainer.style.overflow = 'auto'
         }
     }

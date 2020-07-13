@@ -1,7 +1,7 @@
 #log-container {
     margin: auto;
     overflow: auto;
-    height: 90vh;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .log-card {
