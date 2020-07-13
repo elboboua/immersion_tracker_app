@@ -120,13 +120,13 @@ const addInfiniteScroll =  () => {
 
     if (screen.width > 640) {
         community_feed = document.getElementById('log-container');
+        community_feed.onscroll = async () => {
+            if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
+                await loadMoreLogs();
+            }
+        }
     } else {
         community_feed = document.getElementsByTagName('body')[0];
-    }
-    community_feed.onscroll = async () => {
-        if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
-            await loadMoreLogs();
-        }
     }
 } 
 
