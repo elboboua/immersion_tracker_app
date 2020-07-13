@@ -1,4 +1,5 @@
 let loader = document.getElementById('loader');
+let alreadyLoading = false;
 
 const createAndAppendCards = (result) => {
     let logContainer = document.getElementById('log-container')
@@ -85,11 +86,16 @@ const createAndAppendCards = (result) => {
 
 const loadMoreLogs = async () => {
     
-    let logCards = document.getElementsByClassName('log-card')
-    let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
-    result = await result.json();
-    createAndAppendCards(result);
-    loader.style.display = 'none';
+    if (!alreadyLoading) {
+        alreadyLoading = true;
+        loader.style.display = 'block';
+        let logCards = document.getElementsByClassName('log-card')
+        let result = await fetch(`/log/get-more-community-logs/${logCards[logCards.length-1].id}`)
+        result = await result.json();
+        createAndAppendCards(result);
+        loader.style.display = 'none';
+        alreadyLoading = false;
+    }
 }
 
 
@@ -99,7 +105,6 @@ const addInfiniteScroll =  () => {
         if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
             let logContainer = document.getElementById('log-container')
             logContainer.style.overflow = 'hidden'
-            loader.style.display = 'block';
             await loadMoreLogs();
             logContainer.style.overflow = 'auto'
         }
