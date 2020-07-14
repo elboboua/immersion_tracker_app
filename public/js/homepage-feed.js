@@ -12,10 +12,12 @@ selfLogContainer.style.display = 'none';
 followingButton.onclick = () => {
     selfLogContainer.style.display = 'none';
     followingLogContainer.style.display = 'block';
+    loader.style.display = 'block'
 }
 selfLogButton.onclick = () => {
     followingLogContainer.style.display = 'none';
     selfLogContainer.style.display = 'block';
+    loader.style.display = 'none'
 }
 
 
@@ -42,7 +44,7 @@ const createAndAppendCards = (result, container, cardClass) => {
         user_link.href = `/user/${result[i].username}`
         user_link.className = 'user-link header-components'
         let username = document.createElement('div');
-        username.className = 'header-row'
+        username.className = 'header-row clickable'
         username.innerText = '@' + result[i].username;
 
         avatarContainer.appendChild(avatar);
@@ -119,7 +121,7 @@ const addInfiniteScroll =  () => {
     let community_feed; 
 
     if (screen.width > 640) {
-        community_feed = document.getElementById('log-container');
+        community_feed = document.getElementById('feed-container');
         community_feed.onscroll = async () => {
             if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
                 await loadMoreLogs();

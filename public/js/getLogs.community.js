@@ -42,7 +42,7 @@ const createAndAppendCards = (result, container, cardClass) => {
         user_link.href = `/user/${result[i].username}`
         user_link.className = 'user-link header-components'
         let username = document.createElement('div');
-        username.className = 'header-row'
+        username.className = 'header-row clickable'
         username.innerText = '@' + result[i].username;
 
         avatarContainer.appendChild(avatar);
@@ -126,7 +126,6 @@ const loadMoreLogs = async () => {
 
 const addInfiniteScroll =  () => {
 
-    loader.style.display = 'block';
 
     if (screen.width > 640) {
         community_feed = document.getElementById('log-container');
@@ -143,7 +142,6 @@ const addInfiniteScroll =  () => {
         }
     }
 
-    loader.style.display = 'none';
 
 } 
 

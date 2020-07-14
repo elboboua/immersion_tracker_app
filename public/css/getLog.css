@@ -10,7 +10,13 @@ body {
 #log-container {
     margin: 20px auto;
     overflow: auto;
-    height: calc(var(--vh, 1vh) * 100);
+    height: calc(var(--vh, 1vh) * 90);
+}
+
+#feed-container {
+    margin: 20px auto;
+    overflow: auto;
+    height: calc(var(--vh, 1vh) * 60);
 }
 
 .log-card {
@@ -59,7 +65,7 @@ body {
 }
 
 #loader {
-    display: none;
+    display: block;
     margin: 20px auto;
     border: 6px solid #f3f3f3; /* Light grey */
     border-top: 6px solid #443266; /* Blue */
@@ -74,8 +80,12 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+
 @media screen and (max-width:640px) {
     #log-container {
+        height: 100%;
+    }
+    #feed-container {
         height: 100%;
     }
 }

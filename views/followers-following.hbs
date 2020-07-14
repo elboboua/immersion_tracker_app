@@ -90,12 +90,9 @@ let populateFollowingFollowers = async (url) => {
 
 if (location.href.split('/')[3] != 'followers-following') {
     // user's page
-    let message = document.createElement('h1')
-    message.innerText = 'This page is in progress! Come back soon!'
-    message.style.textAlign = 'center';
-    message.style.margin = '5px';
-
-    document.getElementsByTagName('body')[0].appendChild(message);
+    let username = location.href.split('/')[4]
+    console.log(username)
+    populateFollowingFollowers(`/followers/get-users/${username}`);
 } else {
     // your page
     populateFollowingFollowers('/followers/get-users');

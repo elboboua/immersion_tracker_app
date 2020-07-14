@@ -24,7 +24,7 @@
             <div id="graph-container-year"></div>
             <div class="_fa7cdd4c68507744" data-zone="1d60872081af4e1095e5fa33ffdee7f1" style="width:320px;height:100px;display: inline-block;margin: 0 auto"></div>       
         </div>
-        <div id='log-container' class="col-md container-fluid overflow-auto order-md-1 feed-data-col feed">
+        <div id='feed-container' class="col-md container-fluid overflow-auto order-md-1 feed-data-col feed">
             <div id='button-group' class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 20px">
                 <label class="btn btn-secondary active">
                     <input type="radio" name="options" id="following-button" autocomplete="off" checked> Following
@@ -34,13 +34,16 @@
                 </label>
             </div>
             <div id="following-log-container" class="text-left">   
-            </div>    
+            </div>
+            <div id="loader"></div>    
             <div id="self-log-container" class="text-left">
                 {{> getLogs}}
             </div>
+            
         </div>
     </div>
 </div>
+
 
 <script>
     document.getElementById('home-link').className += ' active'
