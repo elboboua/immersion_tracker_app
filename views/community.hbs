@@ -1,6 +1,18 @@
 <link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="/css/getLog.css">
 
-{{> community-logs}}
+<div class="row">
+   <div class="col-md-8">
+    {{> community-logs}}
+    </div>
+    <div class="col-md-4" id="right-side-bar">
+
+        <div class="top-users">
+            {{> top-users}}
+        </div>
+    </div> 
+</div>
+
 
 <script>
     document.getElementById('community-link').className += ' active'

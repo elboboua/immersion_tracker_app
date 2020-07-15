@@ -1,6 +1,20 @@
 const router = require('express').Router();
 const knex = require('../config/KnexConnection');
 
+router.get('/stats/top-users', async (req, res) => {
+    let result = await knex('user')
+    .join('log', 'log.user_id', 'user.id')
+    .select(knex.raw('user.username, user.avatar_name, sum(log.time) as time'))
+    .whereRaw('log.date_created >= DATE(NOW()) - INTERVAL 7 DAY')
+    .andWhere('deleted', '=', '0')
+    .andWhere('private', '=', '0')
+    .groupBy('log.user_id')
+    .orderBy('time', 'desc')
+    .limit(5)
+
+    res.send(result);
+})
+
 router.get('/:username', (req, res) => {
     if (req.user) {
         res.render('user', {

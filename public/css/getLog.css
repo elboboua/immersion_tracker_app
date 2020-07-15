@@ -88,4 +88,13 @@ body {
     #feed-container {
         height: 100%;
     }
+
+    #right-side-bar {
+        display: none;
+    }
 }
+
+#right-side-bar {
+    margin: 20px auto;
+}
+

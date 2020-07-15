@@ -1,0 +1,54 @@
+<style>
+    #top-users-container {
+        margin: 20px auto;
+    }
+
+    #top-users-card {
+        margin: 20px auto;
+    }
+
+    
+</style>
+
+<div  id="top-users-container">
+    <div class="card" id="top-users-card">
+        <div class="card-header log-card-header text-center">
+            Top Users This Week
+        </div>
+        <div class="card-body text-left list-group-flush" id="top-user-body">
+        </div>
+    </div>
+</div>
+
+<script>
+let getTopUsers = async () => {
+    let result = await fetch('/user/stats/top-users');
+    result = await result.json();
+    console.log(result);
+
+    let cardBody = document.getElementById('top-user-body')
+
+    result.forEach(element => {
+        let user_container = document.createElement('li');
+        user_container.className = 'list-group-item'
+        let avatar_container = document.createElement('div')
+        avatar_container.className = 'avatar-container header-components '
+        let avatar = document.createElement('img');
+        avatar.className = 'avatar'
+        avatar.src = `/imgs/avatars/${element.avatar_name}`;
+        let username = document.createElement('a')
+        username.className = 'clickable-link top-user-link'
+        username.innerText = '@' + element.username
+        username.href = `/user/${element.username}`
+
+        avatar_container.append(avatar)
+        user_container.append(avatar_container);
+        user_container.append(username)
+        cardBody.append(user_container);
+    })
+
+
+}
+
+getTopUsers();
+</script>
