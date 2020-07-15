@@ -4,7 +4,7 @@ dateInput.value = myDate.toLocaleDateString('en-CA');
 
 const getLanguages = async () => {
     let languageSelector = document.getElementById('language');
-    let result = await fetch('/language');
+    let result = await fetch('/language/get-saved-languages');
     result = await result.json()
     
     for (let i = 0; i < result.length; i++) {
