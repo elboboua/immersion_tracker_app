@@ -11,6 +11,9 @@ const getLanguages = async () => {
         let option = document.createElement('option');
         option.value = result[i].id;
         option.text = result[i].name;
+        if (option.text == '-----------') {
+            option.disabled = 'disabled';
+        }
         languageSelector.appendChild(option)
     }
 

@@ -15,6 +15,8 @@ router.get('/get-saved-languages', async (req, res) => {
     .andWhere('log.deleted', '=', 0)
     .orderBy('language.name');
 
+    result = result.concat({id: null, name: '-----------'})
+
     result = result.concat(await knex('language').orderBy('name', 'asc'));
 
     res.send(result);
