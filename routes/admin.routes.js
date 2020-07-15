@@ -59,4 +59,12 @@ router.get('/get-latest-logs', async (req, res) => {
     res.send(result);
 })
 
+router.get('/get-weekly-users', async (req,res) => {
+    let result = await knex('log')
+        .select(knex.raw('count(distinct(user_id)) as count'))
+        .whereRaw('date_created >= DATE(NOW()) - INTERVAL 7 DAY');
+
+    res.send(result[0]);
+})
+
 module.exports = router;

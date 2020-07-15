@@ -36,6 +36,8 @@
             <div class="card-body">
                 <div id="users-stats">
                 </div>
+                <div id="weekly-users-stats">
+                </div>
                 <div id="logs-stats">
                 </div>
                 <div id="hours-stats">
@@ -107,6 +109,12 @@
         let result = await fetch('/admin/count-users');
         result = await result.json();
         document.getElementById('users-stats').innerHTML = `<span class='number-stat'>${result.count}</span> users`;
+    }
+
+    const getWeeklyUsers =  async () => {
+        let result = await fetch('/admin/get-weekly-users');
+        result = await result.json();
+        document.getElementById('weekly-users-stats').innerHTML = `<span class='number-stat'>${result.count}</span> weekly users`;
     }
 
     const getLogs =  async () => {
@@ -201,6 +209,7 @@
 
     const loadPage = () => {
         getUsers();
+        getWeeklyUsers();
         getLogs();
         getHours();
         getLanguages();
