@@ -35,7 +35,7 @@ let getTopUsers = async () => {
         avatar_container.className = 'avatar-container header-components '
         let avatar = document.createElement('img');
         avatar.className = 'avatar'
-        avatar.src = `/imgs/avatars/${element.avatar_name}`;
+        avatar.src = `/imgs/avatars/${element.avatar_name || 'default.png'}`;
         let username = document.createElement('a')
         username.className = 'clickable-link top-user-link'
         username.innerText = '@' + element.username
