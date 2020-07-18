@@ -31,6 +31,26 @@
 }
 
 
+
+.left-components {
+    text-align: left;
+}
+
+.right-components {
+    text-align: right;
+}
+
+@media (max-width: 767px) {
+    .left-components {
+        text-align: center;
+    }
+    
+    .right-components {
+        text-align: center;
+    }
+}
+
+
 #follower-info {
     position: relative;
     top: 5px;
