@@ -1,0 +1,90 @@
+<style>
+    main {
+        margin-top: 20px;
+    }
+</style>
+
+<div id="language-buttons" class="btn-group btn-group-toggle" data-toggle="buttons">
+<div class="row">
+    <div class="col-md" id='left-stats-column'></div>
+    <div class="col-md" id='right-stats-column'></div>
+</div>
+
+</div>
+
+
+<script>
+    // create language buttons
+    const createButtons = async (div_id) => {
+        let languages = await fetch('/stats/get-languages');
+        languages = await languages.json();
+
+        let languageButtons = document.getElementById('language-buttons');
+        let mainContent = document.getElementById('main-content');
+
+        for (let i = 0; i < languages.length; i++) {
+
+            // create button
+            let label = document.createElement('label');
+            label.className = 'btn btn-secondary';
+            label.innerText = languages[i].name;
+            label.id = languages[i].id + '-button';
+
+            let input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'options';
+            input.autocomplete = 'off';
+            input.innerText = languages[i].name;
+
+            label.appendChild(input);
+            languageButtons.appendChild(label)
+
+            // create divs
+            let row = document.createElement('div');
+            row.id = languages[i].id + '-row';
+            row.className = 'language-row'
+            let leftColumn = document.createElement('div')
+            leftColumn.id = languages[i].id + '-left-column';
+            let rightColumn = document.createElement('div')
+            rightColumn.id = languages[i].id + '-right-column';
+            row.appendChild(leftColumn);
+            row.appendChild(rightColumn);
+            mainContent.appendChild(row)
+
+            // hide language rows in css
+
+        }
+
+
+        // make a div row for each language
+        
+
+
+        return languages
+
+
+    }
+
+    const selectFocusLanguage = async () => {
+        let focusLanguage = await fetch('/stats/get-focus-language')
+        focusLanguage = await focusLanguage.json();
+        let button_id = focusLanguage.focus_language_id + '-button'
+        let focusLanguageButton = document.getElementById(button_id);
+        focusLanguageButton.className += ' active';
+    }
+
+    const setupPage = async () => {
+        let languages = await createButtons('language-buttons');
+        await selectFocusLanguage();
+        populateStats(languages);
+    }
+
+
+    // create a function that creates all the graphs for each language passed in as a function
+    const populateStats = (languages) => {
+        //languages.forEach();
+    }
+
+    setupPage();
+    
+</script>

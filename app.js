@@ -16,10 +16,11 @@ const languageRoutes = require('./routes/language.routes');
 const typeRoutes = require('./routes/type.routes');
 const staticRoutes = require('./routes/static.routes');
 const accountRoutes = require('./routes/account.routes');
-const homepageRoutes = require('./routes/homepage.routes')
-const userRoutes = require('./routes/user.routes')
-const adminRoutes = require('./routes/admin.routes')
-const followerRoutes = require('./routes/follower.routes')
+const statsRoutes  = require('./routes/statistics.routes');
+const homepageRoutes = require('./routes/homepage.routes');
+const userRoutes = require('./routes/user.routes');
+const adminRoutes = require('./routes/admin.routes');
+const followerRoutes = require('./routes/follower.routes');
 
 const {isAuthorized} = require('./middleware/authchecker');
 const {hasUsername} = require('./middleware/username_checker');
@@ -56,6 +57,7 @@ app.use('/language', languageRoutes);
 app.use('/type', typeRoutes);
 app.use('/followers', followerRoutes);
 app.use('/account', isAuthorized, accountRoutes);
+app.use('/stats', isAuthorized, statsRoutes);
 app.use('/log', isAuthorized, logRoutes);
 app.use('/', isAuthorized, hasUsername, hasFocusLang, staticRoutes);
 app.use('/admin', isAdmin, adminRoutes);
