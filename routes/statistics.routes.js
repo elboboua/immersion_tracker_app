@@ -93,4 +93,32 @@ router.post('/get-last-week/:language_id', async (req, res) => {
     res.send(result)
 })
 
+router.post('/get-last-month/:language_id', async (req, res) => {
+    let result = await knex('log')
+    .select(knex.raw("date, sum(time) as time"))
+    .where('user_id', '=', req.user.id)
+    .andWhere('date', '<=', req.body.today)
+    .andWhere('date', '>=', req.body.lastMonth)
+    .andWhere('deleted', '=', '0')
+    .andWhere('language_id', '=', req.params.language_id)
+    .groupBy('date')
+    .orderBy('date', 'asc');
+
+    res.send(result)
+})
+
+router.post('/get-last-year/:language_id', async (req, res) => {
+    let result = await knex('log')
+    .select(knex.raw('month(date) as date, sum(time) as time'))
+    .where({user_id: req.user.id})
+    .andWhere('date', '<=', req.body.today)
+    .andWhere('date', '>=', req.body.lastYear)
+    .andWhere('deleted', '=', '0')
+    .andWhere('language_id', '=', req.params.language_id)
+    .groupBy(knex.raw('month(date)'))
+    .orderBy('date', 'asc');;
+
+    res.send(result)
+})
+
 module.exports = router;

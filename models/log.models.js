@@ -58,7 +58,7 @@ const getLogsBetweenDates = (id, today, previousDate) => {
     .groupBy('language_id')
     .orderBy('language_id')
     .orderBy('date', 'asc');
-}
+} 
 
 const getLastWeek = (rb, ru) => {
     return getLogsBetweenDates(ru.id, rb.today, rb.lastWeek);

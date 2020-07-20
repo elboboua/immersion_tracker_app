@@ -71,7 +71,7 @@ const getLastMonthsLog = async () => {
             }
             return fdate
         })
-        
+         
         
         createLanguageGraph(graphObj, 'graph-container-month', 'Hours per Day')
         
