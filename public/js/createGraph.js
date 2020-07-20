@@ -14,7 +14,7 @@ const createLanguageGraph = (graphInfo, id, individualTimesString) => {
     ctx.style.height = '300px'
     ctx.style.minHeight = '200px';
     ctx.width = 'auto';
-    ctx.height = 'auto'
+    ctx.height = 'auto' 
     ctx.getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'line',
