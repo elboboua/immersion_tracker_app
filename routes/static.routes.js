@@ -1,12 +1,6 @@
 const router = require('express').Router();
 
 router.get('/stats', (req, res) => {
-    res.render('graphs', {
-        layout: 'logged-in'
-    })
-});
-
-router.get('/new-stats', (req, res) => {
     res.render('new-stats', {
         layout: 'logged-in'
     })
