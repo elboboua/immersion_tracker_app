@@ -15,7 +15,7 @@ const getLastYearsLog = async () => {
         let iter = new Date();
         iter.setMonth(todayDate.getMonth() - i)
         monthsThisYear.unshift(iter.getMonth());
-    }
+    } 
     
     let lastYearAndToday = {
         today: today,

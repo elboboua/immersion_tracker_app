@@ -5,6 +5,12 @@ router.get('/stats', (req, res) => {
         layout: 'logged-in'
     })
 });
+
+router.get('/new-stats', (req, res) => {
+    res.render('new-stats', {
+        layout: 'logged-in'
+    })
+});
 router.get('/settings', (req, res) => {
     res.render('settings', {
         layout: 'logged-in'

@@ -1,0 +1,409 @@
+<style>
+    main {
+        margin-top: 20px;
+    }
+
+    .language-row {
+        display: none;
+    }
+
+    .selected-language-row {
+        display: block;
+    }
+
+    .basic-stats {
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    .stats {
+        font-size: 2.5em;
+        line-height: 1em;
+        margin-bottom: 20px;
+    }
+
+
+</style>
+
+<div id="language-buttons" class="btn-group btn-group-toggle" data-toggle="buttons"></div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="/ChartJS/Chart.js"></script>
+<script src="/js/createGraph.js"></script>
+<script>
+    // create language buttons
+    const createButtons = async (div_id) => {
+        let languages = await fetch('/stats/get-languages');
+        languages = await languages.json();
+
+        let languageButtons = document.getElementById('language-buttons');
+        let mainContent = document.getElementById('main-content');
+
+        for (let i = 0; i < languages.length; i++) {
+
+            // create button for each language
+            let label = document.createElement('label');
+            label.className = 'btn btn-secondary';
+            label.innerText = languages[i].name;
+            label.id = 'button-' + languages[i].id ;
+
+            let input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'options';
+            input.autocomplete = 'off';
+            input.innerText = languages[i].name;
+            input.id = `button-${languages[i].id}`
+            input.className = 'language-buttons'
+
+            label.appendChild(input);
+            languageButtons.appendChild(label)
+
+            // make a div row for each language
+            let row_parent = document.createElement('div');
+            row_parent.className = 'language-row'
+            row_parent.id = 'row-' + languages[i].id;
+            let row = document.createElement('div');
+            row.className = 'row'
+            row.id = 'row-' + languages[i].id;
+            let title = document.createElement('div');
+            title.innerHTML = `<h1>${languages[i].name}</h1>`
+            title.classList.add('text-center', 'mt-3')
+            let leftColumn = document.createElement('div')
+            leftColumn.id = 'left-column-' + languages[i].id;
+            leftColumn.className = 'col-md container-fluid';
+            let rightColumn = document.createElement('div')
+            rightColumn.id = 'right-column-' + languages[i].id;
+            rightColumn.className = 'col-md container-fluid';
+            row.append(leftColumn);
+            row.append(rightColumn);
+            row_parent.append(title);
+            row_parent.append(row)
+            mainContent.appendChild(row_parent)
+
+        }
+
+        return languages
+
+
+    }
+
+    // fetches focus language id
+    const selectFocusLanguage = async () => {
+        let focusLanguage = await fetch('/stats/get-focus-language')
+        focusLanguage = await focusLanguage.json();
+        let button_id =  'button-'+ focusLanguage.focus_language_id;
+        let focusLanguageButton = document.getElementById(button_id);
+        focusLanguageButton.classList.add('active');
+
+        let row_id = 'row-' + focusLanguage.focus_language_id ;
+        let row_div = document.getElementById(row_id);
+        row_div.classList.add('selected-language-row');
+    }
+
+
+    // bind functions to the buttons
+    const bindButtons = () => {
+        let buttons = document.getElementsByClassName('language-buttons');
+
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', () => {
+                let currently_selected = document.getElementsByClassName('selected-language-row')[0]
+                currently_selected.classList.remove('selected-language-row');
+                let button_id = buttons[i].id.split('-')[1]
+                let new_selected = document.getElementById('row-' + button_id);
+                new_selected.classList.add('selected-language-row')
+            });
+
+        }
+
+    }
+
+    // responsible for setting up the html on the page in the correct order
+    const setupPage = async () => {
+        let languages = await createButtons('language-buttons');
+        await populateStats(languages);
+        bindButtons();
+        selectFocusLanguage();
+    }
+
+    const createBasicStats = async (language) => {
+        let stats = await fetch(`/stats/get-basic-stats/${language.id}`)
+        stats = await stats.json();
+
+        let column = document.getElementById(`left-column-${language.id}`);
+        let card = document.createElement('div');
+        card.className = 'card shadow basic-stats text-left';
+        
+        let total_hours_div = document.createElement('div');
+        let total_hours_text = document.createElement('div');
+        total_hours_text = 'Total Hours: '
+        let total_hours = document.createElement('div');
+        total_hours.innerText = stats.total_hours;
+        total_hours.className = 'stats'
+        total_hours_div.append(total_hours_text);
+        total_hours_div.append(total_hours);
+        card.append(total_hours_div);
+
+        let average_hour_div = document.createElement('div');
+        let average_hour_text = document.createElement('div');
+        average_hour_text.innerText = 'Average Hours per Day: '
+        let average_hour = document.createElement('div');
+        average_hour.innerText = stats.daily_average;
+        average_hour.className = 'stats'
+        average_hour_div.append(average_hour_text);
+        average_hour_div.append(average_hour);
+        card.append(average_hour_div);
+
+        let start_date_div = document.createElement('div');
+        let start_date_text = document.createElement('div');
+        start_date_text.innerText = 'Start Date: '
+        let start_date = document.createElement('div');
+        let start_date_object = new Date(stats.start_date);
+        start_date.innerText = start_date_object.toLocaleDateString();
+        start_date.className = 'stats'
+        start_date_div.append(start_date_text);
+        start_date_div.append(start_date);
+        card.append(start_date_div);
+
+
+        column.append(card);
+    }
+
+    const createRatioGraph = async (language) => {
+        let ratio = await fetch(`/stats/get-ratio/${language.id}`)
+        ratio = await ratio.json();
+
+        let typeNames = [];
+        let typeSums = [];
+        let title;
+
+        ratio.forEach((object) => {
+                typeNames.push(object.type);
+                typeSums.push(object.time)
+                title = object.language;                
+        })
+
+        let pieContainer = document.getElementById(`left-column-${language.id}`);
+        let card = document.createElement('div')
+        card.className = 'card shadow';
+        card.style.padding = '10px'
+        card.style.margin = '10px 0px'
+        card.style.width = 'fit-contents'
+
+        let pie = document.createElement('canvas')
+        pie.style.height = '300px'
+        pie.style.minHeight = '200px';
+        pie.width = '200px';
+        pie.height = '300px'
+        pie.getContext('2d')
+        
+        let myPieChart = new Chart(pie, {
+            type: 'pie',
+            data: {
+                labels: typeNames,
+                datasets: [{
+                    data: typeSums,
+                    backgroundColor: ['#443266', '#563f80','#7052a8', '#7a5eb0', '#bbadd7','#e7e1f0'],
+                }],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Ratios',
+                    position: 'top',
+                    fontSize: 30,
+                    fontColor: ['#443266']
+                },
+            },
+            responsive: true,
+            maintainAspectRatio:false,
+        })
+
+        card.append(pie)
+        pieContainer.append(card)
+    }
+
+    const createWeekGraph = async (language) => { 
+        let datesThisWeek = [];
+
+        for (let i = 0; i < 7; i++) {
+            datesThisWeek.unshift(moment().subtract(i, 'days').format().slice(0,10));
+        }
+
+        let lastWeekAndToday = {
+            today: moment().format(),
+            lastWeek: moment().subtract(6, 'd').format()
+        }
+        lastWeekAndToday = JSON.stringify(lastWeekAndToday);
+        
+        let result = await fetch(`/stats/get-last-week/${language.id}`, {
+            method: 'post',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: lastWeekAndToday
+        })
+        
+        result = await result.json()
+        
+        let graphObj = {
+            dates: datesThisWeek,
+            cumulativeTimes: new Array(7).fill(0),
+            individualTimes: new Array(7).fill(0),
+        }
+
+        result.forEach((object) => {        
+            graphObj.individualTimes[datesThisWeek.indexOf(object.date.slice(0,10))] = Math.round(object.time/60*100)/100;   
+        })
+
+        graphObj.title = 'The Past Week'
+
+        //create cumulativeTimes
+        let sum = 0;
+        for (let i = 0; i< graphObj.cumulativeTimes.length; i++) {
+            sum+= graphObj.individualTimes[i];
+            graphObj.cumulativeTimes[i] = sum;
+        }
+        
+        let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        
+        graphObj.dates = graphObj.dates.map((date) => {
+            let day = new Date(date);
+            date = day.getDay().toString();
+            return days[date]
+        })
+        
+        
+        createLanguageGraph(graphObj, `right-column-${language.id}`, 'Hours per Day')
+    }
+
+    const createMonthGraph = async (language) => {
+        let datesThisMonth = [];
+
+        for (let i = 0; i < 30; i++) {
+            datesThisMonth.unshift(moment().subtract(i, 'days').format().slice(0,10));
+        }
+        let lastMonthAndToday = {
+            today: moment().format(),
+            lastMonth: moment().subtract(29, 'days').format()
+        }
+
+        lastMonthAndToday = JSON.stringify(lastMonthAndToday);
+        
+        let result = await fetch(`/stats/get-last-month/${language.id}`, {
+            method: 'post',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: lastMonthAndToday
+        })
+
+        result = await result.json();
+
+        let graphObj = {
+            dates: datesThisMonth,
+            cumulativeTimes: new Array(30).fill(0),
+            individualTimes: new Array(30).fill(0),
+        }
+        
+        result.forEach((object) => {
+                graphObj.individualTimes[datesThisMonth.indexOf(object.date.slice(0,10))] = Math.round(object.time/60 * 100)/100;
+        })
+        
+        graphObj.title = 'The Past Month'
+
+                let sum = 0;
+        for (let i = 0; i< graphObj.cumulativeTimes.length; i++) {
+            sum+= graphObj.individualTimes[i];
+            graphObj.cumulativeTimes[i] = sum;
+        }
+        
+        
+        graphObj.dates = graphObj.dates.map((date) => {
+            let fdate = date.slice(5).replace('-', '/')
+            if (fdate[0] == 0) {
+                fdate = fdate.slice(1)
+            }
+            return fdate
+        })
+
+        createLanguageGraph(graphObj, `right-column-${language.id}`, 'Hours per Day')
+
+    }
+
+    const createYearGraph = async (language) => {
+        let todayDate = new Date();
+        let lastYearDate = new Date();
+        lastYearDate.setMonth(todayDate.getMonth()-11);
+        lastYearDate.setDate(1)
+        today = todayDate.toJSON().slice(0,10) + 'T00:00:00.000Z'
+        lastYear = lastYearDate.toJSON().slice(0,10) + 'T00:00:00.000Z'
+        
+        let monthsThisYear = [];
+        for (let i = 0; i < 12; i++) {
+            let iter = new Date();
+            iter.setMonth(todayDate.getMonth() - i)
+            monthsThisYear.unshift(iter.getMonth());
+        }
+        
+        let lastYearAndToday = {
+            today: today,
+            lastYear: lastYear
+        }
+        lastYearAndToday = JSON.stringify(lastYearAndToday);
+        
+        let result = await fetch(`/stats/get-last-year/${language.id}`, {
+            method: 'post',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: lastYearAndToday
+        })
+        
+        result = await result.json();
+
+         let graphObj = {
+            dates: monthsThisYear,
+            cumulativeTimes: new Array(12).fill(0),
+            individualTimes: new Array(12).fill(0),
+            title: 'The Past Year'
+        }
+        
+        result.forEach((object) => {
+                graphObj.individualTimes[monthsThisYear.indexOf(object.date-1)] = Math.round(object.time/60 * 100)/100;
+        })
+        
+        //create cumulativeTimes
+        let sum = 0;
+        for (let i = 0; i< graphObj.cumulativeTimes.length; i++) {
+            sum+= graphObj.individualTimes[i];
+            graphObj.cumulativeTimes[i] = sum;
+        }
+        
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        
+        graphObj.dates = graphObj.dates.map((date) => {
+            return months[date]
+        })
+        
+        
+        createLanguageGraph(graphObj, `right-column-${language.id}`, 'Hours per Month')
+
+    }
+
+
+    // create a function that creates all the graphs for each language passed in as a function
+    const populateStats = (languages) => {
+        languages.forEach(async (language) => {
+            await createBasicStats(language);
+            await createRatioGraph(language);
+            await createWeekGraph(language);
+            await createMonthGraph(language);
+            await createYearGraph(language);
+        });
+    }
+
+    setupPage();
+    
+</script>
