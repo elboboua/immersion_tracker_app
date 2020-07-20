@@ -32,6 +32,9 @@
 <script src="/ChartJS/Chart.js"></script>
 <script src="/js/createGraph.js"></script>
 <script>
+
+    document.getElementById('stats-link').className += ' active'
+
     // create language buttons
     const createButtons = async (div_id) => {
         let languages = await fetch('/stats/get-languages');
@@ -80,12 +83,9 @@
             row_parent.append(title);
             row_parent.append(row)
             mainContent.appendChild(row_parent)
-
         }
 
         return languages
-
-
     }
 
     // fetches focus language id
