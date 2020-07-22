@@ -84,8 +84,9 @@ const createAndAppendCards = (result, container, cardClass) => {
 
         let date = document.createElement('span');
         date.className = 'right-info';
-        let date_var = new Date(result[i].date);
-        date.innerText = date_var.toLocaleDateString();
+        // let date_var = new Date(result[i].date);
+        // date.innerText = date_var.toLocaleDateString();
+        date.innerText = result[i].date
         secondLine.appendChild(date);
 
         body.appendChild(activityLine)

@@ -53,8 +53,12 @@ const getLogs = async () => {
 
         let date = document.createElement('span');
         date.className = 'right-info';
-        let date_var = new Date(result[i].date);
-        date.innerText = date_var.toLocaleDateString();
+
+        // fixing bug
+        // let date_var = new Date(result[i].date + '00:00:00+00:');
+        // console.log(date_var)
+        // date.innerText = date_var.toLocaleDateString();
+        date.innerText = result[i].date
         secondLine.appendChild(date);
 
         body.appendChild(firstLine)

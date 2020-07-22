@@ -56,11 +56,10 @@ const getLastWeeksLog = async () => {
         }
         
         let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        
+
         graphObj.dates = graphObj.dates.map((date) => {
-            let day = new Date(date);
-            date = day.getDay().toString();
-            return days[date]
+            date = moment(date).format('dddd')
+            return date.slice(0,3)
         })
         
         
