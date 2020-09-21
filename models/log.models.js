@@ -24,7 +24,7 @@ const getAllLogsJoinLanguage = (id) => {
 
 const getLogsDateByID = (id) => {
     return knex('log')
-    .select(knex.raw("distinct(DATE_FORMAT(date_created, '%Y-%m-%d')) as date"))
+    .select(knex.raw("distinct(DATE_FORMAT(date, '%Y-%m-%d')) as date"))
     .where({user_id: id, deleted: false})
     .orderBy('date', 'desc');
 }
@@ -94,7 +94,7 @@ const getAllTime = (rb, ru) => {
     .orderBy('language_id')
     .orderBy('year', 'asc');
 }
-
+ 
 module.exports = {
     getAllLogsByID,
     getAllLogsJoinLanguage,

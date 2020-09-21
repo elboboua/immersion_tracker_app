@@ -14,7 +14,7 @@ const calculateStreak = async () => {
         if (today.toISOString().slice(0,10) == element.toISOString().slice(0,10)) {
             streak++;
         }
-
+ 
         if (yesterday.toISOString().slice(0,10) == element.toISOString().slice(0,10)) {
             streak++;
             yesterday.setDate(yesterday.getDate()-1);

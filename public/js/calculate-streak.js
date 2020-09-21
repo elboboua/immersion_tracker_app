@@ -9,7 +9,7 @@ const calculateStreak = async () => {
     let streak = 0;
     
     dates.forEach(element => {
-
+ 
 
         if (today.toISOString().slice(0,10) == element.toISOString().slice(0,10)) {
             streak++;

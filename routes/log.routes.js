@@ -87,7 +87,7 @@ router.get('/get-more-following-logs/:log_id', async (req, res) => {
 
 router.get('/getLogsDate', async (req, res) => {
     let result = await logModels.getLogsDateByID(req.user.id);
-    res.send(result);
+    res.send(result); 
 })
 
 // create a new log
