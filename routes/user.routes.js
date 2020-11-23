@@ -76,7 +76,10 @@ router.get('/:username/getAllLogsWithLanguages', async (req, res) => {
 
 router.get('/:username/getLogsDate', async (req, res) => {
     let user = await knex('user').where({username: req.params.username});
-    let result = await knex('log').select(knex.raw("distinct(DATE_FORMAT(date_created, '%Y-%m-%d')) as date")).where({user_id: user[0].id, deleted: false}).orderBy('date', 'desc');
+    let result = await knex('log')
+    .select(knex.raw("distinct(DATE_FORMAT(date, '%Y-%m-%d')) as date"))
+    .where({user_id: user[0].id, deleted: false})
+    .orderBy('date', 'desc');
     res.send(result);
 })
 
