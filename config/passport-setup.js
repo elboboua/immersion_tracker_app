@@ -4,6 +4,7 @@ const LocalStrategy = require('passport-local');
 const Keys = require('./keys');
 const User = require('../models/user.model');
 const knex = require('../config/KnexConnection');
+const bcrypt = require('bcrypt')
 // TODO add knex to this file
 
 passport.serializeUser((user, done) => {
@@ -36,14 +37,22 @@ passport.use(new LocalStrategy({
     passwordField: 'password',
     },
     async function(email, password, done) {
-        const result =  await knex('user').where({email}).andWhere({password}); 
-        let user = result[0];
-        console.log(user)
-        if (user === undefined || user.length == 0) {
-            return done(null, false)
-        } else {
-            return done(null, user)
-        } 
+        // check if email is in db
+        const result =  await knex('user').where({email}); 
+        
+        // if unavailable, fail
+        if (result.length === 0) return done(null, false)
+
+        // create user from result
+        const user = result[0];
+
+        // validate password
+        const validPass = await bcrypt.compare(password, user.password);
+
+        // if email not valid, fail
+        if (!validPass) return  done(null, false);
+
+        return done(null, user);
     
     }
 ));

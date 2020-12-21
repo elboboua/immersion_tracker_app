@@ -19,15 +19,12 @@
     background-color: #443266;
     padding: 20px; 
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 #signin-text {
     color: white;
 }
 
-#signin-button {
-    margin: auto;
-}
 
 #user-logs {
     margin-top: 40px;

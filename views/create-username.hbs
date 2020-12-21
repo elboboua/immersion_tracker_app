@@ -9,7 +9,6 @@
             <form id="username-form" method="GET" action="/account/update-username/">
                 {{!-- // name of log --}}
                 <div class="form-group">
-                    <div id="submission-message" class="alert-danger message">{{message}}</div>
                     <div id="username-message" class="message">{{message}}</div>
                     <div id="loader"></div>
                     <input type="text" class="form-control" name="username" id="username-input" placeholder="set a username" required minlength="5" pattern="[a-zA-Z0-9]+" autocomplete="off">

@@ -1,0 +1,80 @@
+ <style>
+     .input-field {
+         width: 90%;
+         margin: 7px;
+         border-radius: 5px;
+         border-color:#443266;
+         border-style: solid;
+         border-width: 1px;
+         padding: 5px;
+     }
+
+     .mini-text {
+         color: white;
+     }
+
+     .mini-text:hover {
+         color: gray;
+     }
+
+     #local-google-divider {
+         background-color: white;
+     }
+
+     #submit-button {
+         background-color: #C6A4D0;
+         color: #443266;
+         font-weight: bold;
+     }
+
+    #signin-button {
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #443266;
+    }
+ </style>
+ 
+ <div class="card text-center" id="signup-box">
+    <form method="POST" action="/auth/signin">
+        <input class="input-field" type="email" name="email" placeholder="Email">
+        
+        <input class="input-field" type="password" name="password" placeholder="Password">
+
+        <input class="input-field" id="submit-button" type="submit" value="Log in"> 
+    </form>
+    <small class="mini-text"><a>Forgot password?</a></small>
+    <hr/ id="local-google-divider">
+    <a href='/auth/google' id='signin-button' class='btn btn-outline-light'>
+        <img src="https://img.icons8.com/color/50/000000/google-logo.png" class='img' width='30px'/>
+        with Google
+    </a>
+    <small class="mini-text"><a  data-toggle="modal" data-target="#exampleModal">or signup</a></small>
+</div>
+
+<!-- signup modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign up!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/auth/signup">
+            <input class="input-field" type="email" name="email" placeholder="Email">
+            
+            <input class="input-field" type="password" name="password" placeholder="Password">
+
+            <input class="input-field" id="submit-button" type="submit" value="Sign up"> 
+        </form>
+        <hr/ id="local-google-divider">
+        <a href='/auth/google' id='signin-button' class='btn btn-outline-light'>
+            <img src="https://img.icons8.com/color/50/000000/google-logo.png" class='img' width='30px'/>
+            with Google
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

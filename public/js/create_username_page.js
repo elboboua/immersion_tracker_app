@@ -21,7 +21,7 @@ usernameInput.oninput = async () => {
             usernameMessage.innerText = 'Username is too long';
         } else if (usernameInput.value.length > 4) {
             loader.style.display = 'block';
-            let result = await fetch(`/account/try-username/$`, {
+            let result = await fetch(`/account/try-username/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -54,6 +54,7 @@ router.get('/upload-avatar', (req, res) => {
 
 router.post('/try-username/', async (req,res) => {    
     let result = await knex('user').where({username: req.body.username})
+    console.log(result)
     if (result.length > 0) {
         res.sendStatus(409)
     } else {
