@@ -26,7 +26,7 @@ const sendPasswordResetToken = async (user, token) => {
     html: 
     `
     <b>Hello, ${user.username}</b>
-    <p><a href="http://localhost:3000/auth/reset-password-via-email/${token}"> Reset your password! </a></p>
+    <p><a href="https://polylogger.com/auth/reset-password-via-email/${token}"> Reset your password! </a></p>
     `
     , // html body
   });
