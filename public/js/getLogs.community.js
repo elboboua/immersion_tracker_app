@@ -129,7 +129,7 @@ const addInfiniteScroll =  () => {
 
 
     if (screen.width > 640) {
-        community_feed = document.getElementById('log-container');
+        community_feed = document.getElementById('community-log-container');
         community_feed.onscroll = async () => {
             if (community_feed.scrollTop + community_feed.clientHeight >= community_feed.scrollHeight) {
                 await loadMoreLogs();

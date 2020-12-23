@@ -15,6 +15,7 @@
 
      .mini-text:hover {
          color: gray;
+         text-decoration: none;
      }
 
      #local-google-divider {
@@ -36,13 +37,16 @@
  
  <div class="card text-center" id="signup-box">
     <form method="POST" action="/auth/signin">
+        {{#if message}}
+            <div id="message" class="message alert alert-primary">{{message}}</div>
+        {{/if}}
         <input class="input-field" type="email" name="email" placeholder="Email">
         
         <input class="input-field" type="password" name="password" placeholder="Password">
 
         <input class="input-field" id="submit-button" type="submit" value="Log in"> 
     </form>
-    <small class="mini-text"><a>Forgot password?</a></small>
+    <small><a class="mini-text" href="/auth/forgot-password">Forgot password?</a></small>
     <hr/ id="local-google-divider">
     <a href='/auth/google' id='signin-button' class='btn btn-outline-light'>
         <img src="https://img.icons8.com/color/50/000000/google-logo.png" class='img' width='30px'/>

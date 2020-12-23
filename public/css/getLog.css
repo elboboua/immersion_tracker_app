@@ -7,16 +7,22 @@ body {
     margin: 20px auto;
 }
 
+#community-log-container {
+    margin: 20px auto;
+    overflow: auto;
+    height: 93vh; 
+}
+
 #log-container {
     margin: 20px auto;
     overflow: auto;
-    height: calc(var(--vh, 1vh) * 90);
+    height: 73vh;
 }
 
 #feed-container {
     margin: 20px auto;
     overflow: auto;
-    height: calc(var(--vh, 1vh) * 60);
+    height: 73vh;
 }
 
 .log-card {
