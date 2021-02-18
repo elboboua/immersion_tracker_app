@@ -8,14 +8,25 @@
         color: white;
         background-color: #443266;
     }
+    .card-privacy-policy {
+        padding: 15px;
+        text-align: left;
+    }
 </style>
 <div class="container">
     <div class="card">
         <div class="card-header">
             {{error}}
         </div>
+        {{#if message}}
         <div class="card-body">
             {{message}}
         </div>
+        {{/if}}
+        {{#if privacyPolicy}}
+        <div class="card-privacy-policy">
+            {{{privacyPolicy}}}
+        </div>
+        {{/if}}
     </div>
 </div>
