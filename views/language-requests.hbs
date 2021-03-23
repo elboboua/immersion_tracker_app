@@ -1,0 +1,129 @@
+<style>
+
+    .similar-select {
+        width: 100%;
+    }
+    
+    .submit-button {
+        margin-left: 5px;
+    }
+
+    .row {
+        margin: 10px auto;
+    }
+</style>
+ <h1>Language Requests</h1>
+
+ <div class="spinner-border" id="spinner" role="status">
+            <span class="sr-only">Loading...</span>
+</div>
+
+<div class="container-fluid text-left">
+    <div class="row">
+        
+      <table id="language-request-table" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Similar Languages</th>
+                    <th scope="col">Classify</th>
+                </tr>
+            </thead>
+            <tbody id="language-request-body"></tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<script>
+
+    const getLanguageRequests = async () => {
+        let result = await fetch('/admin/language-requests/get-language-requests');
+        let languageRequests = await result.json();
+        return languageRequests;
+    }
+
+    const displayLanguageRequests = async () => {
+
+        let languageRequests = await getLanguageRequests();
+        
+        let languageRequestBody = document.getElementById('language-request-body');
+
+        languageRequests.forEach(request => {
+            let row = document.createElement('tr')
+
+            let name = document.createElement('td')
+            name.innerText = request.name;
+
+            let similarCol = document.createElement('td')
+            let similar = document.createElement('select')
+            similar.className = 'similar-select'
+            request.similar.forEach(language => {
+                let option = document.createElement('option');
+                option.text = language.name;
+                similar.add(option)
+            })
+            similarCol.append(similar)
+
+            let classifyCol = document.createElement('td')
+            let classify = document.createElement('select');
+            let rejectOption = document.createElement('option');
+            rejectOption.value = 0;
+            rejectOption.text = 'reject';
+
+            let acceptOption = document.createElement('option');
+            acceptOption.value = 1;
+            acceptOption.text = 'accept';
+
+            let duplicateOption = document.createElement('option');
+            duplicateOption.value = 2;
+            duplicateOption.text = 'duplicate';
+
+            classify.add(rejectOption)
+            classify.add(acceptOption)
+            classify.add(duplicateOption)
+            classifyCol.append(classify);
+
+            let submitButton = document.createElement('button');
+            submitButton.type = 'submit'
+            submitButton.value = "Submit"
+            submitButton.innerText = "Submit"
+            submitButton.className = 'submit-button'
+
+            submitButton.onclick =  async () => {
+
+                let spinner = document.getElementById('spinner')
+                spinner.hidden = false;
+
+                let name = request.name;
+                let classified = classify.value;
+                let data = {name, classified};
+                let result = await fetch('/admin/language-requests/classify-language-request', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                let submitButtons = document.getElementsByClassName('submit-button');
+                // hide submit buttons
+                //submitButtons.for(button => button.hidden = true);
+
+                location.reload();
+            }
+            classifyCol.append(submitButton)
+
+
+            
+
+            row.append(name);
+            row.append(similarCol);
+            row.append(classifyCol)
+            languageRequestBody.append(row)
+        })
+        let spinner = document.getElementById('spinner')
+        spinner.hidden = true;
+    }
+
+displayLanguageRequests()
+</script>
