@@ -33,6 +33,14 @@ router.get("/count-languages", async (req, res) => {
   res.send(result[0]);
 });
 
+router.get("/count-requested-languages", async (req, res) => {
+  let result = await knex("language_request")
+    .count("id", { as: "count" })
+    .where({ approved: null });
+  console.log(result);
+  res.send(result[0]);
+});
+
 router.get("/get-top-users", async (req, res) => {
   let result = await knex("log")
     .join("user", "user.id", "log.user_id")

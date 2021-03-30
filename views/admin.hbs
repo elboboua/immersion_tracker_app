@@ -44,6 +44,9 @@
                 </div>
                 <div id="languages-stats">
                 </div>
+                 <div id="language-request-stats">
+                </div>
+                
             </div>
         </div>
     </div>
@@ -109,6 +112,12 @@
         let result = await fetch('/admin/count-users');
         result = await result.json();
         document.getElementById('users-stats').innerHTML = `<span class='number-stat'>${result.count}</span> users`;
+    }
+
+    const getRequestedLangs =  async () => {
+        let result = await fetch('/admin/count-requested-languages');
+        result = await result.json();
+        document.getElementById('language-request-stats').innerHTML = `<span class='number-stat'>${result.count}</span> new language requests ${result.count > 0 ? '<a class="btn btn-primary" href="/admin/language-requests" role="button">Review</a>': ''}`;
     }
 
     const getWeeklyUsers =  async () => {
@@ -209,6 +218,7 @@
 
     const loadPage = () => {
         getUsers();
+        getRequestedLangs();
         getWeeklyUsers();
         getLogs();
         getHours();
