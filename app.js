@@ -22,6 +22,7 @@ const homepageRoutes = require("./routes/homepage.routes");
 const userRoutes = require("./routes/user.routes");
 const adminRoutes = require("./routes/admin.routes");
 const followerRoutes = require("./routes/follower.routes");
+const emailRoutes = require("./routes/email.routes");
 const appImageUploadRoutes = require("./routes/appImageUpload.routes");
 
 const { isAuthorized } = require("./middleware/authchecker");
@@ -64,6 +65,7 @@ app.use("/language", languageRoutes);
 app.use("/type", typeRoutes);
 app.use("/followers", followerRoutes);
 app.use("/privacy", privacyRoutes);
+app.use("/email", emailRoutes);
 app.use("/appImageUpload", isJWTAuthorized, appImageUploadRoutes);
 app.use("/account", isAuthorized, accountRoutes);
 app.use("/stats", isAuthorized, statsRoutes);
