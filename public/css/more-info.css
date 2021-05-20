@@ -1,35 +1,78 @@
 #prompt {
-    margin: 20px auto;
-    text-align: center;
-
+  margin: 20px auto;
+  text-align: center;
 }
 
 #username-box {
-    max-width: 500px;
-    margin: auto;
+  max-width: 500px;
+  margin: auto;
 }
 
 #username-form {
-    margin: 15px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 form {
-    padding: 5px;
+  padding: 5px;
 }
 
+.fa-minus-circle {
+  margin-left: 4px;
+}
+
+.checkbox-container {
+  columns: 2;
+}
+
+.checkbox-container > div {
+  text-align: left !important;
+}
 
 form > input {
-    margin: 10px auto;
-    width: 200px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form > textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form > label {
+  font-weight: bold;
+}
+
+form > div {
+  margin: 0px;
 }
 
 .form-control-file {
-    width: 75%;
-    margin: auto;
-    margin-bottom: 10px;
+  width: 75%;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 #submit-button {
-    margin: auto;
-    width: 200px;
+  margin: auto;
+  width: 200px;
+}
+
+.form-label {
+  margin: 0;
+}
+
+label {
+  margin: 0;
+}
+
+#submit-button-container {
+  margin-top: 10px;
+}
+
+#select-container {
+  margin-bottom: 10px;
 }

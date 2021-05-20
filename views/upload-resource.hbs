@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="/css/more-info.css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+<div id="prompt"><h3>Upload a resource!</h3></div>
+<div class="container">
+  <div id="username-form">
+    <div class="card text-left" id="username-box">
+
+      <form
+        id="username-form"
+        action="/resource/create"
+        class="form-group"
+        enctype="multipart/form-data"
+        method="POST"
+      >
+        {{#if message}}
+          <div
+            id="username-message"
+            class="alert alert-danger"
+          >{{message}}</div>
+        {{/if}}
+        <label class="form-label">Icon or Photo</label>
+        <input id="photo-input" type="file" name="photo" accept="image/*" />
+        <label class="form-label">Name</label>
+        <input id="name-input" type="text" name="name" />
+        <label class="form-label">Transliterated Name (if not in the latin
+          script)</label>
+        <input
+          id="transliterated-name-input"
+          type="text"
+          name="transliterated-name"
+        />
+        <label class="form-label">Description</label>
+        <textarea id="description-input" name="description"></textarea>
+
+        <label class="form-label">Link to Access Content</label>
+        <input id="link-input" type="text" name="link" />
+
+        <label>Language(s)</label>
+        <div id="language-select-container">
+          <div id="language-select-box-1">
+            <select id="language-select-1">
+            </select>
+            <i
+              class="fa fa-plus-circle"
+              id="add-new-language-select"
+              style="color: green;"
+            ></i>
+          </div>
+        </div>
+
+        <label>Resource Type(s)</label>
+        <div id="type-select-container">
+          <div id="type-select-box-1">
+            <select id="type-select-1">
+            </select>
+            <i
+              class="fa fa-plus-circle"
+              id="add-new-type-select"
+              style="color: green;"
+            ></i>
+          </div>
+        </div>
+
+        <label>Resource Category</label>
+        <div id="category-select-container">
+          <div id="category-select-box-1">
+            <select id="category-select-1">
+            </select>
+            <i
+              class="fa fa-plus-circle"
+              id="add-new-category-select"
+              style="color: green;"
+            ></i>
+          </div>
+        </div>
+
+        <label>Language level</label>
+        <div id="checkbox-container">
+          <div>
+            <input type="checkbox" name="0" value="0" />
+            <label for="0">Beginner</label>
+          </div>
+          <div>
+            <input type="checkbox" name="1" value="0" />
+            <label for="1">Elementary</label>
+          </div>
+          <div>
+            <input type="checkbox" name="2" value="0" />
+            <label for="2">Intermediate</label>
+          </div>
+          <div>
+            <input type="checkbox" name="3" value="0" />
+            <label for="3">Advanced</label>
+          </div>
+          <div>
+            <input type="checkbox" name="4" value="0" />
+            <label for="4">Easy Native</label>
+          </div>
+          <div>
+            <input type="checkbox" name="5" value="0" />
+            <label for="5">Native</label>
+          </div>
+          <div>
+            <input type="checkbox" name="6" value="0" />
+            <label for="6">Educated Native</label>
+          </div>
+        </div>
+        <div id="submit-button-container">
+          <input
+            id="submit-button"
+            class="btn btn-block form-group"
+            style="background-color: #443266; color: white;"
+            type="submit"
+            value="Upload Resource"
+          />
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/js/upload-resource.js"></script>

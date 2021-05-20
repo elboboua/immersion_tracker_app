@@ -1,17 +1,38 @@
-<link rel="stylesheet" href="/css/more-info.css">
+<link rel="stylesheet" href="/css/more-info.css" />
 
 <div id="prompt"><h3>Upload an avatar!</h3></div>
 <div class="container">
-    <div id="username-form">
-        <div  class="card text-center" id="username-box">
-            
-            <form id="username-form" action="/account/upload-avatar" class="form-group" enctype="multipart/form-data" method="POST"> 
-                {{#if message }}
-                    <div id="username-message" class='alert alert-danger'>{{message}}</div>
-                {{/if}}
-                <input id="username-input" type="file" class="form-control-file" name="avatar" accept="image/*" />
-                <input id="submit-button" class="btn btn-block form-group" style="background-color: #443266; color: white;" type="submit" value="Upload Photo"/>
-            </form>
-        </div>
+  <div id="username-form">
+    <div class="card text-center" id="username-box">
+
+      <form
+        id="username-form"
+        action="/account/upload-avatar"
+        class="form-group"
+        enctype="multipart/form-data"
+        method="POST"
+      >
+        {{#if message}}
+          <div
+            id="username-message"
+            class="alert alert-danger"
+          >{{message}}</div>
+        {{/if}}
+        <input
+          id="username-input"
+          type="file"
+          class="form-control-file"
+          name="avatar"
+          accept="image/*"
+        />
+        <input
+          id="submit-button"
+          class="btn btn-block form-group"
+          style="background-color: #443266; color: white;"
+          type="submit"
+          value="Upload Photo"
+        />
+      </form>
     </div>
+  </div>
 </div>

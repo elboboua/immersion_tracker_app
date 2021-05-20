@@ -2,6 +2,9 @@ require("dotenv").config();
 require("./config/passport-setup");
 
 const express = require("express");
+const formData = require("express-form-data");
+const os = require("os");
+
 const passport = require("passport");
 const PORT = process.env.PORT || 3000;
 const cookieSession = require("cookie-session");
@@ -25,12 +28,15 @@ const adminRoutes = require("./routes/admin.routes");
 const followerRoutes = require("./routes/follower.routes");
 const emailRoutes = require("./routes/email.routes");
 const appImageUploadRoutes = require("./routes/appImageUpload.routes");
+const resourceRoutes = require("./routes/resource.routes");
+const resourceTypeRoutes = require("./routes/resourceType.routes");
 
 const { isAuthorized } = require("./middleware/authchecker");
 const { isJWTAuthorized } = require("./middleware/JWTauthchecker");
 const { hasUsername } = require("./middleware/username_checker");
 const { hasFocusLang } = require("./middleware/focus_language_checker");
 const { isAdmin } = require("./middleware/admin_checker");
+const { as } = require("./config/KnexConnection");
 
 const app = express();
 
@@ -68,6 +74,8 @@ app.use("/followers", followerRoutes);
 app.use("/privacy", privacyRoutes);
 app.use("/terms-of-use", termRoutes);
 app.use("/email", emailRoutes);
+app.use("/resource", resourceRoutes);
+app.use("/resource-type", resourceTypeRoutes);
 app.use("/appImageUpload", isJWTAuthorized, appImageUploadRoutes);
 app.use("/account", isAuthorized, accountRoutes);
 app.use("/stats", isAuthorized, statsRoutes);
