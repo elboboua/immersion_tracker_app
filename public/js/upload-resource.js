@@ -183,7 +183,7 @@ submitButton.addEventListener("click", async (e) => {
     method: "post",
     body: data,
   });
-  let url = "http://localhost:3000/resource/upload-resource";
+  let url = "https://polylogger.com/resource/upload-resource";
   if (res.status === 200) {
     window.location.replace(
       `${url}?message=The resource has been successfully uploaded. Thanks for contributing!`
