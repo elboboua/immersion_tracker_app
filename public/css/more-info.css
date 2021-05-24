@@ -8,6 +8,24 @@
   margin: auto;
 }
 
+#resource-box {
+  min-width: 700px;
+  margin: auto;
+}
+
+#photo-preview {
+  height: 100%;
+  object-fit: fill;
+}
+
+#photo-container {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 10%;
+  overflow: hidden;
+}
+
 #username-form {
   margin: 15px;
   display: flex;
@@ -75,4 +93,9 @@ label {
 
 #select-container {
   margin-bottom: 10px;
+}
+
+#resource-message {
+  width: 300px;
+  margin: auto;
 }

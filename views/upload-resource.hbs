@@ -4,10 +4,18 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
 
-<div id="prompt"><h3>Upload a resource!</h3></div>
+<div id="prompt"><h3>Upload a resource!</h3>
+  {{#if message}}
+    <div id="resource-message" class="alert alert-success">{{message}}</div>
+  {{/if}}
+  {{#if error}}
+    <div id="resource-message" class="alert alert-danger">{{error}}</div>
+  {{/if}}
+</div>
+
 <div class="container">
   <div id="username-form">
-    <div class="card text-left" id="username-box">
+    <div class="card text-left" id="resource-box">
 
       <form
         id="username-form"
@@ -16,14 +24,12 @@
         enctype="multipart/form-data"
         method="POST"
       >
-        {{#if message}}
-          <div
-            id="username-message"
-            class="alert alert-danger"
-          >{{message}}</div>
-        {{/if}}
-        <label class="form-label">Icon or Photo</label>
+        <label class="form-label">Icon or Photo (for best results, use a square
+          image)</label>
         <input id="photo-input" type="file" name="photo" accept="image/*" />
+        <div id="photo-container" hidden>
+          <img id="photo-preview" src="#" alt="your image" />
+        </div>
         <label class="form-label">Name</label>
         <input id="name-input" type="text" name="name" />
         <label class="form-label">Transliterated Name (if not in the latin
@@ -31,7 +37,7 @@
         <input
           id="transliterated-name-input"
           type="text"
-          name="transliterated-name"
+          name="transliterated-name-input"
         />
         <label class="form-label">Description</label>
         <textarea id="description-input" name="description"></textarea>

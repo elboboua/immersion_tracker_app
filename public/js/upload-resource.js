@@ -6,6 +6,16 @@ let name = document.getElementById("name-input");
 let transliteratedName = document.getElementById("transliterated-name-input");
 let description = document.getElementById("description-input");
 let link = document.getElementById("link-input");
+let photoPreview = document.getElementById("photo-preview");
+let photoContainer = document.getElementById("photo-container");
+
+photo.addEventListener("change", (e) => {
+  const [image] = photo.files;
+  if (image) {
+    photoPreview.src = URL.createObjectURL(image);
+    photoContainer.hidden = false;
+  }
+});
 
 const getLanguagesAndPopulateSelect = async () => {
   let res = await fetch("/language");
@@ -173,6 +183,14 @@ submitButton.addEventListener("click", async (e) => {
     method: "post",
     body: data,
   });
-  res = await res.json();
-  console.log(res);
+  let url = "http://localhost:3000/resource/upload-resource";
+  if (res.status === 200) {
+    window.location.replace(
+      `${url}?message=The resource has been successfully uploaded. Thanks for contributing!`
+    );
+  } else {
+    window.location.replace(
+      `${url}?error=There has a been a problem uploading this resource. If the problem persists, please reach out on twitter @polylogger.`
+    );
+  }
 });
