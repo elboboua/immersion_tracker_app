@@ -122,4 +122,81 @@ router.post(
   }
 );
 
+router.get("/get-all", async (req, res) => {
+  let resources = await knex("resource");
+  resources.forEach((element) => {
+    element.types = [];
+    element.categories = [];
+    element.languages = [];
+    element.levels = [];
+  });
+
+  // get type, category, languages, levels
+  let categories = await knex("resource_type")
+    .select("name")
+    .select("resource_id")
+    .join("resource_type_name", "resource_type_id", "resource_type_name.id")
+    .whereIn(
+      "resource_id",
+      resources.map((element) => element.id)
+    );
+
+  categories.forEach((category) => {
+    let resourceIndex = resources.findIndex(
+      (element) => element.id === category.resource_id
+    );
+    resources[resourceIndex].categories.push(category.name);
+  });
+
+  let types = await knex("resource_learning_type")
+    .select("name")
+    .select("resource_id")
+    .join("type", "type_id", "type.id")
+    .whereIn(
+      "resource_id",
+      resources.map((element) => element.id)
+    );
+
+  types.forEach((type) => {
+    let resourceIndex = resources.findIndex(
+      (element) => element.id === type.resource_id
+    );
+    resources[resourceIndex].types.push(type.name);
+  });
+
+  let languages = await knex("resource_language")
+    .join("language", "language_id", "language.id")
+    .select("name")
+    .select("resource_id")
+    .whereIn(
+      "resource_id",
+      resources.map((element) => element.id)
+    );
+
+  languages.forEach((language) => {
+    let resourceIndex = resources.findIndex(
+      (element) => element.id === language.resource_id
+    );
+    resources[resourceIndex].languages.push(language.name);
+  });
+
+  let levels = await knex("resource_language_level")
+    .select("level")
+    .select("resource_id")
+    .join("language_level", "language_level_id", "language_level.id")
+    .whereIn(
+      "resource_id",
+      resources.map((element) => element.id)
+    );
+
+  levels.forEach((level) => {
+    let resourceIndex = resources.findIndex(
+      (element) => element.id === level.resource_id
+    );
+    resources[resourceIndex].levels.push(level.level);
+  });
+
+  res.send(resources);
+});
+
 module.exports = router;
