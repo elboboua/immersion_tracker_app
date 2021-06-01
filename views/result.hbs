@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="/css/more-info.css" />
+
+<div id="prompt">
+  {{#if message}}
+    <div id="resource-message" class="alert alert-success">{{message}}</div>
+  {{/if}}
+  {{#if error}}
+    <div id="resource-message" class="alert alert-danger">{{error}}</div>
+  {{/if}}
+</div>

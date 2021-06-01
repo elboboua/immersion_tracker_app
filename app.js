@@ -30,6 +30,7 @@ const emailRoutes = require("./routes/email.routes");
 const appImageUploadRoutes = require("./routes/appImageUpload.routes");
 const resourceRoutes = require("./routes/resource.routes");
 const resourceTypeRoutes = require("./routes/resourceType.routes");
+const challengeRoutes = require("./routes/challenge.routes");
 
 const { isAuthorized } = require("./middleware/authchecker");
 const { isJWTAuthorized } = require("./middleware/JWTauthchecker");
@@ -76,6 +77,7 @@ app.use("/terms-of-use", termRoutes);
 app.use("/email", emailRoutes);
 app.use("/resource", resourceRoutes);
 app.use("/resource-type", resourceTypeRoutes);
+app.use("/challenge", challengeRoutes);
 app.use("/appImageUpload", isJWTAuthorized, appImageUploadRoutes);
 app.use("/account", isAuthorized, accountRoutes);
 app.use("/stats", isAuthorized, statsRoutes);
