@@ -31,6 +31,7 @@ const appImageUploadRoutes = require("./routes/appImageUpload.routes");
 const resourceRoutes = require("./routes/resource.routes");
 const resourceTypeRoutes = require("./routes/resourceType.routes");
 const challengeRoutes = require("./routes/challenge.routes");
+const wellKnownRoutes = require("./routes/wellknown.routes");
 
 const { isAuthorized } = require("./middleware/authchecker");
 const { isJWTAuthorized } = require("./middleware/JWTauthchecker");
@@ -78,6 +79,7 @@ app.use("/email", emailRoutes);
 app.use("/resource", resourceRoutes);
 app.use("/resource-type", resourceTypeRoutes);
 app.use("/challenge", challengeRoutes);
+app.use("/.wellknown", wellKnownRoutes);
 app.use("/appImageUpload", isJWTAuthorized, appImageUploadRoutes);
 app.use("/account", isAuthorized, accountRoutes);
 app.use("/stats", isAuthorized, statsRoutes);
