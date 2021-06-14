@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "PZWK2NY86C.com.app.polylogger",
-        "paths": ["*"]
+        "paths": ["/user/*"]
       }
     ]
   }

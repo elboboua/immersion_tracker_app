@@ -79,7 +79,7 @@ app.use("/email", emailRoutes);
 app.use("/resource", resourceRoutes);
 app.use("/resource-type", resourceTypeRoutes);
 app.use("/challenge", challengeRoutes);
-app.use("/.wellknown", wellKnownRoutes);
+app.use("/.well-known", wellKnownRoutes);
 app.use("/appImageUpload", isJWTAuthorized, appImageUploadRoutes);
 app.use("/account", isAuthorized, accountRoutes);
 app.use("/stats", isAuthorized, statsRoutes);
